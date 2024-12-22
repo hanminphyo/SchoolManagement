@@ -10,6 +10,8 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
+        // dd($groups);
+
         return view('groups.index', ['groups' => $groups]);
     }
 }

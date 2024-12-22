@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
         Group::factory(10)->create();
 
         Teacher::factory(5)->create();
+
+        Student::factory(30)->create();
     }
 }
 // User::factory()->create([

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\RoleContrller;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ Route::get('/roles', [RoleContrller::class, 'index']);
 Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/groups', [GroupController::class, 'index']);
 Route::get('/teachers', [TeacherController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index']);
 
 Auth::routes();
 

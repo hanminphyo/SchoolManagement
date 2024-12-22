@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1 class="m-4">Users List</h1>
+    <h1>Student List</h1>
     <div class="container">
         <table class="table table-hover">
             <thead>
@@ -8,20 +8,20 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Course</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($students as $student)
                     <tr>
-                        <th scope="row">{{ $user['id'] }}</th>
-                        <td>{{ $user['name'] }}</td>
-                        <td>{{ $user['email'] }}</td>
-                        <td>{{ $user['role'] }}</td>
-                        <td>{{ $user['phone'] }}</td>
-                        <td>{{ $user['address'] }}</td>
+                        <th scope="row">{{ $student['id'] }}</th>
+                        <td>{{ $student['name'] }}</td>
+                        <td>{{ $student['email'] }}</td>
+                        <td>{{ $student->course->name }}</td>
+                        <td>{{ $student['phone'] }}</td>
+                        <td>{{ $student['address'] }}</td>
                     </tr>
                 @endforeach
             </tbody>
