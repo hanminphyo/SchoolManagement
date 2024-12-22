@@ -16,6 +16,6 @@ class Teacher extends Model
     ];
     public function group()
     {
-        return $this->hasMany(Group::class, 'group_id');
+        return $this->hasMany(Group::class);
     }
 }

@@ -16,7 +16,7 @@
                         @foreach ($courses as $course)
                             <tr>
                                 <th scope="row">{{ $course['id'] }}</th>
-                                <td>{{ $course->name }}</td>
+                                <td>{{ $course->name }}({{count($course->students)}})</td>
                                 <td>{{ $course->fee }}</td>
                             </tr>
                         @endforeach

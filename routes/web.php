@@ -17,11 +17,11 @@ Route::get('/', function () {
 // Route::resource('/users', UserController::class);
 
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/roles', [RoleContrller::class, 'index']);
-Route::get('/courses', [CourseController::class, 'index']);
-Route::get('/groups', [GroupController::class, 'index']);
-Route::get('/teachers', [TeacherController::class, 'index']);
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/roles', [RoleContrller::class, 'index'])->name('roles');
+Route::get('/courses', [CourseController::class, 'index'])->name('courses');
+Route::get('/groups', [GroupController::class, 'index'])->name('groups');
+Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
+Route::get('/students', [StudentController::class, 'index'])->name('students');
 
 Auth::routes();
 

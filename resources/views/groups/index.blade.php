@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Classes List</h1>
+    <h1 class="m-4">Class List</h1>
     <div class="container mt-4">
         <div class="row">
             <div class="col-6 mx-auto">
@@ -8,7 +8,6 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            {{-- <th scope="col">Teacher</th> --}}
                             <th scope="col">Courses</th>
                             <th scope="col">Date of Attendance</th>
                             <th scope="col">Time</th>
