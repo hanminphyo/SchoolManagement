@@ -21,7 +21,15 @@ Route::get('/roles', [RoleContrller::class, 'index'])->name('roles');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 Route::get('/groups', [GroupController::class, 'index'])->name('groups');
 Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
-Route::get('/students', [StudentController::class, 'index'])->name('students');
+
+Route::resource('students', StudentController::class);
+Route::get('students', [StudentController::class, 'index']);
+Route::get('students/{$id}', [StudentController::class, 'show']);
+Route::get('/students/create', [StudentController::class, 'create']);
+Route::post('/students', [StudentController::class, 'store']);
+Route::get('/students/{id}/edit', [StudentController::class, 'edit']);
+Route::put('/students/{id}', [StudentController::class, 'update']);
+
 
 Auth::routes();
 

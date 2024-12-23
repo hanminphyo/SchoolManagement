@@ -2,6 +2,12 @@
 @section('content')
     <div class="container">
         <h1 class="m-4">Student List</h1>
+        @session('info')
+            <div class="alert alert-success">
+                {{ session('info') }}
+            </div>
+        @endsession
+        <a href="{{ url('/students/create') }}" class="btn btn-primary">Add Student</a>
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -12,6 +18,7 @@
                         <th scope="col">Course</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +30,8 @@
                             <td>{{ $student->course->name }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>{{ $student->address }}</td>
+                            <td><a href="" class="btn btn-warning">Edit</a></td>
+                            <td><a href="" class="btn btn-danger">Delete</a></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class StudentFactory extends Factory
 {
-    protected static ?string $password;
+
     /**
      * Define the model's default state.
      *
@@ -22,7 +22,6 @@ class StudentFactory extends Factory
             'name' => $this->faker->name(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'),
             'course_id' => $this->faker->numberBetween(1, 10),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
