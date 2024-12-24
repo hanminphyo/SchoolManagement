@@ -10,11 +10,10 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/students/' . $student->id) }}" method="post">
+        <form action="{{ url('/students') }}" method="post">
             @csrf
-            @method('PUT')
             <label>Name</label>
-            <input type="text" name="name" class="form-control" value="{{ $student->name }}">
+            <input type="text" name="name" class="form-control" value="{{$student->name }}">
             <br />
             <label>Email</label>
             <input type="email" name="email" class="form-control" value="{{ $student->email }}">
@@ -22,9 +21,7 @@
             <label>Course</label>
             <select name="course_id" class="form-control">
                 @foreach ($courses as $course)
-                    <option value="{{ $course->id }}" {{ $course_id === $student->$course_id ? 'selected' : '' }}>
-                        {{ $course->name }}
-                    </option>
+                    <option value="{{ $course->id }}">{{ $course->name }}</option>
                 @endforeach
             </select>
             <br />

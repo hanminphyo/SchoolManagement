@@ -30,8 +30,7 @@
                             <td>{{ $student->course->name }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>{{ $student->address }}</td>
-                            <td><a href="" class="btn btn-warning">Edit</a></td>
-                            <td><a href="" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{{url('/students/'. $student->id)}}" class="btn btn-warning">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>

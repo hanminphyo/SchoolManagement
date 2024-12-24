@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         Teacher::factory(5)->create();
 
-        Student::factory(30)->create();
+        Student::factory()->create();
     }
 }
 // User::factory()->create([
