@@ -18,4 +18,12 @@ class UserController extends Controller
         $users = User::all();
         return view('users.index', ['users' => $users]);
     }
+
+    public function create()
+    {
+        $users = User::all();
+        return view('users.create', ['users' => $users]);
+    }
+
+ 
 }

@@ -55,7 +55,7 @@ class StudentController extends Controller
         $student->phone = request()->phone;
         $student->address = request()->address;
         $student->save();
-        return redirect('/students')->with('info', 'A Student has been Update');
+        return redirect('/students')->with('info', 'A Student has been created');
     }
 
     public function edit($id)

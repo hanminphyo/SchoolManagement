@@ -9,7 +9,7 @@
                     @endforeach
                 </ol>
             </div>
-        @endif
+        @endif        
         <form action="{{ url('/students') }}" method="post">
             @csrf
             <label>Name</label>

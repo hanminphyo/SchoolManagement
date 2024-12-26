@@ -16,12 +16,7 @@ Route::get('/', function () {
 
 // Route::resource('/users', UserController::class);
 
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/roles', [RoleContrller::class, 'index'])->name('roles');
-Route::get('/courses', [CourseController::class, 'index'])->name('courses');
-Route::get('/groups', [GroupController::class, 'index'])->name('groups');
-Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
-
+//Student Management//
 Route::resource('students', StudentController::class);
 Route::get('students', [StudentController::class, 'index']);
 Route::get('/students/create', [StudentController::class, 'create']);
@@ -30,6 +25,30 @@ Route::get('students/{$id}', [StudentController::class, 'show']);
 Route::get('/students/{id}/edit', [StudentController::class, 'edit']);
 Route::put('/students/{id}', [StudentController::class, 'update']);
 Route::delete('students/{$id}', [StudentController::class, 'destroy']);
+
+
+// Course Mangagement
+Route::resource('courses', CourseController::class);
+Route::get('courses', [CourseController::class, 'index']);
+Route::get('/courses/create', [CourseController::class, 'create']);
+Route::post('/courses', [CourseController::class, 'store']);
+Route::get('courses/{$id}', [CourseController::class, 'show']);
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit']);
+Route::put('/courses/{id}', [StudentController::class, 'update']);
+Route::delete('courses/{$id}', [CourseController::class, 'destroy']);
+
+
+Route::get('/roles', [RoleContrller::class, 'index'])->name('roles');
+Route::get('/groups', [GroupController::class, 'index'])->name('groups');
+Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
+
+// Route::resource('user', UserController::class);
+// Route::get('users', [UserController::class, 'index']);
+// Route::get('/users/create', [UserController::class, 'create']);
+// Route::post('users', [UserController::class, 'store']);
+
+
+
 
 
 Auth::routes();

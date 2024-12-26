@@ -21,7 +21,7 @@ class StudentFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => $this->faker->safeEmail(),
             'course_id' => $this->faker->numberBetween(1, 10),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),

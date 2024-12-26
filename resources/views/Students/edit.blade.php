@@ -1,19 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-warning">
-                <ol>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ol>
-            </div>
-        @endif
         <form action="{{ url('/students') }}" method="post">
             @csrf
             <label>Name</label>
-            <input type="text" name="name" class="form-control" value="{{$student->name }}">
+            <input type="text" name="name" class="form-control" value="{{ $student->name }}">
             <br />
             <label>Email</label>
             <input type="email" name="email" class="form-control" value="{{ $student->email }}">

@@ -19,9 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-
-
         Role::factory()->create([
             'name' => 'Admin'
         ]);
@@ -32,8 +29,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Student'
         ]);
 
-        Course::factory(10)->create();
-
+        
         Group::factory(10)->create();
 
         Teacher::factory(5)->create();

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('fee')->numberBetween(10000, 100000);
+            $table->string('fee');
+            // $table->unsignedBigInteger('teacher_id');
             $table->timestamps();
+            // $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });
     }
 

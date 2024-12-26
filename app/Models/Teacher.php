@@ -13,9 +13,14 @@ class Teacher extends Model
         'name',
         'email',
         'password',
+        'course_id',
     ];
     public function group()
     {
         return $this->hasMany(Group::class);
     }
+    // public function courses()
+    // {
+    //     return $this->belongsTo(Course::class);
+    // }
 }

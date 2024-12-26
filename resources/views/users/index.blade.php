@@ -2,6 +2,7 @@
 @section('content')
     <div class="container">
         <h1 class="m-4">User List</h1>
+        <a href="{{ url('/users/create') }}" class="btn btn-primary">Add User</a>
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -13,6 +14,7 @@
                         <th scope="col">Phone</th>
                         <th scope="col">Address</th>
                     </tr>
+
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
