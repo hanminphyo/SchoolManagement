@@ -38,9 +38,17 @@ Route::put('/courses/{id}', [StudentController::class, 'update']);
 Route::delete('courses/{$id}', [CourseController::class, 'destroy']);
 
 
+Route::resource('groups', GroupController::class);
+Route::get('groups', [GroupController::class, 'index']);
+Route::get('/groups/create', [GroupController::class, 'create']);
+Route::get('/groups', [GroupController::class, 'store']);
+
+// Route::resource('teachers', TeacherController::class);
+// Route::get('teachers', [TeacherController::class, 'index']);
+// Route::get('teachers/create', [TeacherController::class, 'create']);
+
 Route::get('/roles', [RoleContrller::class, 'index'])->name('roles');
-Route::get('/groups', [GroupController::class, 'index'])->name('groups');
-Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
+// Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers');
 
 // Route::resource('user', UserController::class);
 // Route::get('users', [UserController::class, 'index']);

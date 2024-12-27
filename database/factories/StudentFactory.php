@@ -18,13 +18,6 @@ class StudentFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => $this->faker->name(),
-            'name' => $this->faker->name(),
-            'email' => $this->faker->safeEmail(),
-            'course_id' => $this->faker->numberBetween(1, 10),
-            'phone' => $this->faker->phoneNumber(),
-            'address' => $this->faker->address(),
-        ];
+        return [];
     }
 }

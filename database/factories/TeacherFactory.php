@@ -22,7 +22,7 @@ class TeacherFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'),
+            'course_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

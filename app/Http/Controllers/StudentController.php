@@ -63,9 +63,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         $courses = Course::all();
         // dd($courses);
-        return view('students.edit')
-            ->with('student', $student)
-            ->with('courses', $courses);
+        return view('students.edit')->with('student', $student)->with('courses', $courses);
     }
 
     public function update($id)

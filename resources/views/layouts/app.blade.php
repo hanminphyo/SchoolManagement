@@ -34,35 +34,35 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        @if (Route::has('groups'))
+                        {{-- @if (Route::has('groups'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/groups') }}">{{ __('Class') }}</a>
+                                <a class="nav-link" href="{{ route('/groups') }}">{{ __('Class') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('students'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/students') }}">{{ __('Student') }}</a>
+                                <a class="nav-link" href="{{ route('students.index') }}">{{ __('Student') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('courses'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/courses') }}">{{ __('Course') }}</a>
+                                <a class="nav-link" href="{{ route('courses.index') }}">{{ __('Course') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('roles'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/roles') }}">{{ __('Role') }}</a>
+                                <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Role') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('teachers'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/teachers') }}">{{ __('Teacher') }}</a>
+                                <a class="nav-link" href="{{ route('teachers.index') }}">{{ __('Teacher') }}</a>
                             </li>
-                        @endif
+                        @endif --}}
 
                     </ul>
 

@@ -29,12 +29,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Student'
         ]);
 
-        
+
+        Course::factory(10)->create();
+        Teacher::factory(20)->create();
         Group::factory(10)->create();
-
-        Teacher::factory(5)->create();
-
-        Student::factory()->create();
+        Student::factory(10)->create();
     }
 }
 // User::factory()->create([

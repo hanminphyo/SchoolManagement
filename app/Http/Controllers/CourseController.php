@@ -53,16 +53,25 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
-        return view('courses.edit')
-            ->with('course', $course);
+        return view('courses.edit')->with('course', $course);
     }
 
     public function  update($id)
     {
+        $validator = validator(
+            request()->all(),
+            [
+                'name' => 'required',
+                'fee' => 'required',
+            ]
+        );
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         $course = Course::find($id);
         $course->name = request()->course_name;
         $course->fee = request()->course_fee;
         $course->save();
-        return redirect('/courses');
+        return redirect('/courses')->with('info', 'A Course has been Update');
     }
 }

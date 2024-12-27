@@ -12,15 +12,15 @@ class Teacher extends Model
     protected $fillable = [
         'name',
         'email',
-        'password',
         'course_id',
     ];
-    public function group()
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    public function groups()
     {
         return $this->hasMany(Group::class);
     }
-    // public function courses()
-    // {
-    //     return $this->belongsTo(Course::class);
-    // }
 }

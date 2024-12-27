@@ -20,8 +20,7 @@
                             <tr>
                                 <th scope="row">
                                     {{ $course['id'] }}</th>
-                                <td>{{ $course->name }}</td>
-                                {{-- <td>({{ count($course->students) }})</td> --}}
+                                <td>{{ $course->name }}({{ count($course->students) }})</td>
                                 <td>{{ $course->fee }}</td>
                                 <td><a href="{{ url('/courses/' . $course->id) }}" class="btn btn-success">Manage</a></td>
                             </tr>

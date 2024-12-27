@@ -16,23 +16,22 @@ return new class extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('course_id');
             $table->string('days_in_a_week');
-            $table->time('time');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
 
-
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            // $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('groups');
     }
 };

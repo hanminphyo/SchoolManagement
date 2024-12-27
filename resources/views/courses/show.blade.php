@@ -7,15 +7,16 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger float-end">Delete</button>
         </form>
+
         <div class="row">
             <div class="col-6 mx-auto">
                 <form action="{{ url('/courses') }}" method="post">
                     @csrf
                     <label>Course Name</label>
-                    <input type="text" name="course_name" class="form-control" value="{{ $course->name }}">
+                    <input type="text" name="course_name" class="form-control" value="{{ $course->name }}" readonly>
                     <br />
                     <label>Fee</label>
-                    <input type="text" name="course_fee" class="form-control" value="{{ $course->fee }}">
+                    <input type="text" name="course_fee" class="form-control" value="{{ $course->fee }}" readonly>
                     <br />
                     <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="btn btn-warning me-3">Edit</a>
                 </form>
