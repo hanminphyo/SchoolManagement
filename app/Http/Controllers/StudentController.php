@@ -31,8 +31,9 @@ class StudentController extends Controller
     {
 
         $student = Student::find($id);
+        $studentName = $student->name;
         $student->delete();
-        return redirect('/students');
+        return redirect('/students')->with('info', "'$studentName'  has been Deleted");
     }
 
     public function store()

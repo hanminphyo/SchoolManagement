@@ -34,36 +34,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        {{-- @if (Route::has('groups'))
+                        @if (Route::has('students.index'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('/groups') }}">{{ __('Class') }}</a>
+                                <a class="nav nav-link" href="{{ route('students.index') }}">{{ __('Student') }}</a>
                             </li>
                         @endif
-
-                        @if (Route::has('students'))
+                        @if (Route::has('courses.index'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('students.index') }}">{{ __('Student') }}</a>
+                                <a class="nav nav-link" href="{{ route('courses.index') }}">{{ __('Course') }}</a>
                             </li>
                         @endif
-
-                        @if (Route::has('courses'))
+                        @if (Route::has('groups.index'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('courses.index') }}">{{ __('Course') }}</a>
+                                <a class="nav nav-link" href="{{ route('groups.index') }}">{{ __('Class') }}</a>
                             </li>
                         @endif
-
-                        @if (Route::has('roles'))
+                        @if (Route::has('teachers.index'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Role') }}</a>
+                                <a class="nav nav-link" href="{{ route('teachers.index') }}">{{ __('Teacher') }}</a>
                             </li>
                         @endif
-
-                        @if (Route::has('teachers'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teachers.index') }}">{{ __('Teacher') }}</a>
-                            </li>
-                        @endif --}}
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->

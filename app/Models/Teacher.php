@@ -14,9 +14,9 @@ class Teacher extends Model
         'email',
         'course_id',
     ];
-    public function courses()
+    public function course()
     {
-        return $this->hasMany(Course::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function groups()

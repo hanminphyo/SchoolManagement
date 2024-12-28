@@ -28,12 +28,6 @@
                         @endforeach
                     </select>
                     <br />
-                    <label>Phone</label>
-                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
-                    <br />
-                    <label>Address</label>
-                    <input type="text" name="address" class="form-control" value="{{ old('address') }}">
-                    <br />
                     <button class="btn btn-success" type="submit">Confirm</button>
                 </form>
             </div>

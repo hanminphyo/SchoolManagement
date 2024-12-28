@@ -3,6 +3,15 @@
     <div class="container">
         <h1 class="m-4">Student List</h1>
         <div class="container">
+            @if ($errors->any())
+                <div class="alert alert-warning">
+                    <ol>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ol>
+                </div>
+            @endif
             <table class="table table-hover">
                 <thead>
                     <tr>

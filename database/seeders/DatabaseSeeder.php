@@ -28,12 +28,6 @@ class DatabaseSeeder extends Seeder
         Role::factory()->create([
             'name' => 'Student'
         ]);
-
-
-        Course::factory(10)->create();
-        Teacher::factory(20)->create();
-        Group::factory(10)->create();
-        Student::factory(10)->create();
     }
 }
 // User::factory()->create([

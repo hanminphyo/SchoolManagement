@@ -25,7 +25,7 @@ class GroupController extends Controller
     {
         $courses = Course::all();
         $teachers = Teacher::all();
-        return view('groups.create', ['courses' => $courses], ['teachers', $teachers]);
+        return view('groups.create')->with('courses', $courses)->with('teachers', $teachers);
     }
     public function show($id)
     {
@@ -36,8 +36,8 @@ class GroupController extends Controller
     public function store()
     {
         $validator = validator(request()->all(), [
-            'teacher_id' => 'required',
             'course_id' => 'required',
+            'teacher_id' => 'required',
             'days_in_a_week' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
@@ -49,8 +49,8 @@ class GroupController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $group = new Group();
-        $group->teacher_id = request()->teacher_id;
         $group->course_id = request()->course_id;
+        $group->teacher_id = request()->teacher_id;
         $group->days_in_a_week = request()->days_in_a_week;
         $group->start_time = request()->start_time;
         $group->end_time = request()->end_time;
@@ -59,4 +59,18 @@ class GroupController extends Controller
         $group->save();
         return redirect('/groups')->with('info', 'A Class has been created');
     }
+
+
+    public function edit($id)
+    {
+        $group = Group::find($id);
+        $courses = Course::all();
+        $teachers = Teacher::all();
+        return view('groups.create')
+            ->with('group', $group)
+            ->with('courses', $courses)
+            ->with('teachers', $teachers);
+    }
+
+    
 }

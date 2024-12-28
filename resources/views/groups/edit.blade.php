@@ -10,20 +10,22 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/groups') }}" method="post">
+        <form action="{{ url('/groups/' . $group->id) }}" method="post">
+            @method('PUT')
             @csrf
             <label>Course Name</label>
             <select name="course_id" class="form-control">
                 @foreach ($courses as $course)
-                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    <option value="{{ $course->id }}" {{ $course->id == $group->course_id ? 'selected' : '' }}>
+                        {{ $course->name }}
+                    </option>
                 @endforeach
             </select>
             <br />
             <label>Teacher Name</label>
             <select name="teacher_id" class="form-control">
-                @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                @endforeach
+                <option>{{ $group->$teacher->name }}</option>
+
             </select>
             <br />
             <label>Date</label>
@@ -41,7 +43,7 @@
             <label>End Date</label>
             <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
             <br />
-            <button class="btn btn-success" type="submit">Create</button>
+            <button class="btn btn-success" type="submit">Update</button>
         </form>
     </div>
 @endsection
