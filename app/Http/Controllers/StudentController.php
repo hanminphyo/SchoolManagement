@@ -9,12 +9,18 @@ use Symfony\Component\VarDumper\Cloner\Stub;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $students = Student::all();
         // dd($students);
         return view('students.index', ['students' => $students]);
     }
+
     public function create()
     {
         $courses = Course::all();
@@ -27,6 +33,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         return view('students.show', ['student' => $student]);
     }
+    
     public function destroy($id)
     {
 
@@ -51,12 +58,13 @@ class StudentController extends Controller
         }
         $student = new Student();
         $student->name = request()->name;
+        $studentName = $student->name;
         $student->email = request()->email;
         $student->course_id = request()->course_id;
         $student->phone = request()->phone;
         $student->address = request()->address;
         $student->save();
-        return redirect('/students')->with('info', 'A Student has been created');
+        return redirect('/students')->with('info',  " '$studentName'  has been created");
     }
 
     public function edit($id)
@@ -82,11 +90,12 @@ class StudentController extends Controller
         }
         $student = Student::find($id);
         $student->name = request()->name;
+        $studentName = $student->name;
         $student->email = request()->email;
         $student->course_id = request()->course_id;
         $student->phone = request()->phone;
         $student->address = request()->address;
         $student->save();
-        return redirect('/students')->with('info', 'A Student has been Update');
+        return redirect('/students')->with('info',  " '$studentName'  has been Updated");
     }
 }

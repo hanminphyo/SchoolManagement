@@ -2,13 +2,14 @@
 @section('content')
     <div class="container">
         <h1 class="m-4">Class List</h1>
-        <a href="{{ url('/groups/create') }}" class="btn btn-primary">Add Class</a>
-        {{-- @session('info')
+        @auth
+            <a href="{{ url('/groups/create') }}" class="btn btn-primary mb-3">Add Class</a>
+        @endauth
+        @session('info')
             <div class="alert alert-success">
                 {{ session('info') }}
             </div>
-        @endsession --}}
-        {{-- <a href="{{ url('/students/create') }}" class="btn btn-primary">Add Student</a> --}}
+        @endsession
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -35,7 +36,17 @@
                             <td>{{ $group->end_time }}</td>
                             <td>{{ $group->start_date }}</td>
                             <td>{{ $group->end_date }}</td>
-                            <td><a href="{{ url('/groups/' . $group->id) }}" class="btn btn-outline-success">Manage</a></td>
+                            <td class="d-flex"><a href="{{ url('/groups/' . $group->id) }}"
+                                    class="btn btn-warning me-2">Detail</a>
+                                @auth
+                                    <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">Edit</a>
+                                    <form action="{{ url('/groups/' . $group->id) }}"method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger me-2">Delete</button>
+                                    </form>
+                                @endauth
+                            </td>
                     @endforeach
                     </tr>
 

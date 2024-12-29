@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="m-4">Student List</h1>
+        <h1 class="mt-2">Student List</h1>
         @session('info')
             <div class="alert alert-success">
                 {{ session('info') }}
             </div>
         @endsession
-        <a href="{{ url('/students/create') }}" class="btn btn-primary">Add Student</a>
+        @auth
+            <a href="{{ url('/students/create') }}" class="btn btn-primary">Add Student</a>
+        @endauth
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -30,7 +32,18 @@
                             <td>{{ $student->course->name }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>{{ $student->address }}</td>
-                            <td><a href="{{url('/students/'. $student->id)}}" class="btn btn-warning">Detail</a></td>
+                            <td><a href="{{ url('/students/' . $student->id) }}" class="btn btn-warning">Detail</a></td>
+                            @auth
+                                <td><a href="{{ url('/students/' . $student->id . '/edit') }}" class="btn btn-warning">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="{{ url('/students/' . $student->id) }}"method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            @endauth
                         </tr>
                     @endforeach
                 </tbody>

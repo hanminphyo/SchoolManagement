@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+    
     public function index()
     {
 
@@ -49,10 +54,11 @@ class TeacherController extends Controller
         }
         $teacher = new Teacher();
         $teacher->name = request()->name;
+        $teacherName = $teacher->name;
         $teacher->email = request()->email;
         $teacher->course_id = request()->course_id;
         $teacher->save();
-        return redirect('/teachers')->with('info', 'A Class has been created');
+        return redirect('/teachers')->with('info', " '$teacherName' has been created");
     }
 
     public function edit($id)
@@ -75,9 +81,10 @@ class TeacherController extends Controller
         }
         $teacher = Teacher::find($id);
         $teacher->name = request()->name;
+        $teacherName = $teacher->name;
         $teacher->email = request()->email;
         $teacher->course_id = request()->course_id;
         $teacher->save();
-        return redirect('/teachers')->with('info', 'A Student has been Update');
+        return redirect('/teachers')->with('info', "'$teacherName' has been Update");
     }
 }

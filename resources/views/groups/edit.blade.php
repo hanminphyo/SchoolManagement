@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <h1 class="m-4">Class List</h1>
+        <a class="icon-link icon-link-hover mb-2" href="{{ url('/groups') }}">
+            <i class="bi bi-arrow-left"></i>
+            Go Back
+        </a>
         @if ($errors->any())
             <div class="alert alert-warning">
                 <ol>
@@ -29,19 +34,19 @@
             </select>
             <br />
             <label>Date</label>
-            <input type="date" name="days_in_a_week" class="form-control" value="{{ old('days_in_a_week') }}">
+            <input type="date" name="days_in_a_week" class="form-control" value="{{ $group->days_in_a_week }}">
             <br />
             <label>Start Time</label>
-            <input type="time" name="start_time" class="form-control" value="{{ old('start_time') }}">
+            <input type="time" name="start_time" class="form-control" value="{{ $group->start_time }}">
             <br />
             <label>End Time</label>
-            <input type="time" name="end_time" class="form-control" value="{{ old('end_time') }}">
+            <input type="time" name="end_time" class="form-control" value="{{ $group->end_time }}">
             <br />
             <label>Start Date</label>
-            <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}">
+            <input type="date" name="start_date" class="form-control" value="{{ $group->start_date }}">
             <br />
             <label>End Date</label>
-            <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+            <input type="date" name="end_date" class="form-control" value="{{ $group->end_date }}">
             <br />
             <button class="btn btn-success" type="submit">Update</button>
         </form>

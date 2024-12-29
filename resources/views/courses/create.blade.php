@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <a class="icon-link icon-link-hover mb-2" href="{{ url('/courses') }}">
+            <i class="bi bi-arrow-left"></i>
+            Go Back
+        </a>
         @if ($errors->any())
             <div class="alert alert-warning">
                 <ol>

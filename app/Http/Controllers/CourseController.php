@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $courses = Course::all();
@@ -29,8 +34,9 @@ class CourseController extends Controller
     {
 
         $course = Course::find($id);
+        $courseName = $course->name;
         $course->delete();
-        return redirect('/courses');
+        return redirect('/courses')->with('info', "'$courseName 'has been Delete'");
     }
 
     public function store()
@@ -45,9 +51,10 @@ class CourseController extends Controller
 
         $course = new Course();
         $course->name = request()->course_name;
+        $courseName = $course->name;
         $course->fee = request()->course_fee;
         $course->save();
-        return redirect('/courses')->with('info', 'A course has been created!');
+        return redirect('/courses')->with('info', "' $courseName '  has been created!");
     }
 
     public function edit($id)
@@ -57,22 +64,21 @@ class CourseController extends Controller
         return view('courses.edit')->with('course', $course);
     }
 
-    public function  update($id)
+    public function update($id)
     {
-        $validator = validator(
-            request()->all(),
-            [
-                'name' => 'required',
-                'fee' => 'required',
-            ]
-        );
+        $validator = validator(request()->all(), [
+            'name' => 'required',
+            'fee' => 'required',
+        ]);
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
         $course = Course::find($id);
-        $course->name = request()->course_name;
-        $course->fee = request()->course_fee;
+        $course->name = request()->name;
+        $courseName = $course->name;
+        $course->fee = request()->fee;
         $course->save();
-        return redirect('/courses')->with('info', 'A Course has been Update');
+        return redirect('/courses')->with('info',  " '$courseName'  has been Updated");
     }
 }

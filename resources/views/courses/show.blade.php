@@ -1,26 +1,18 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Courses List</h1>
-    <div class="container mt-4">
-        <form action="{{ url('/courses/' . $course->id) }}"method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger float-end">Delete</button>
-        </form>
-
-        <div class="row">
-            <div class="col-6 mx-auto">
-                <form action="{{ url('/courses') }}" method="post">
-                    @csrf
-                    <label>Course Name</label>
-                    <input type="text" name="course_name" class="form-control" value="{{ $course->name }}" readonly>
-                    <br />
-                    <label>Fee</label>
-                    <input type="text" name="course_fee" class="form-control" value="{{ $course->fee }}" readonly>
-                    <br />
-                    <a href="{{ url('/courses/' . $course->id . '/edit') }}" class="btn btn-warning me-3">Edit</a>
-                </form>
-            </div>
+    <div class="container">
+        <h1 class="mt-2">Course List</h1>
+        <a class="icon-link icon-link-hover" href="{{ url('/courses') }}">
+            <i class="bi bi-arrow-left"></i>
+            Go Back
+        </a>
+        <div class="container mt-4">
+            <label class="fs-5 fw-bold">Course Name</label>
+            <input type="text" name="course_name" class="form-control" value="{{ $course->name }}" readonly>
+            <br />
+            <label class="fs-5 fw-bold">Fee</label>
+            <input type="text" name="course_fee" class="form-control" value="{{ $course->fee }}" readonly>
+            <br />
         </div>
     </div>
 @endsection
