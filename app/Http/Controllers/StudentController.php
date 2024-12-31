@@ -33,7 +33,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         return view('students.show', ['student' => $student]);
     }
-    
+
     public function destroy($id)
     {
 
@@ -97,5 +97,16 @@ class StudentController extends Controller
         $student->address = request()->address;
         $student->save();
         return redirect('/students')->with('info',  " '$studentName'  has been Updated");
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $students = Student::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->orWhere('class', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('students.index')->with(['students' => $students, 'query' => $query]);;
     }
 }
