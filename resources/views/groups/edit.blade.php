@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="m-4">Class List</h1>
+        <h1>Class List</h1>
         <a class="icon-link icon-link-hover mb-2" href="{{ url('/groups') }}">
             <i class="bi bi-arrow-left"></i>
             Go Back

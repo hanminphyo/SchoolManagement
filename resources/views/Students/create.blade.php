@@ -14,28 +14,37 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/students') }}" method="post">
-            @csrf
-            <label class="fs-5">Name</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-            <br />
-            <label class="fs-5">Email</label>
-            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-            <br />
-            <label class="fs-5">Course</label>
-            <select name="course_id" class="form-control">
-                @foreach ($courses as $course)
-                    <option value="{{ $course->id }}">{{ $course->name }}</option>
-                @endforeach
-            </select>
-            <br />
-            <label class="fs-5">Phone</label>
-            <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
-            <br />
-            <label class="fs-5">Address</label>
-            <input type="text" name="address" class="form-control" value="{{ old('address') }}">
-            <br />
-            <button class="btn btn-success" type="submit">Confirm</button>
-        </form>
+        <div class="container">
+            <form action="{{ url('/students') }}" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <label class="fs-5 mb-2">Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                    </div>
+                    <div class="col-md-6 ">
+                        <label class="fs-5 mb-2">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="fs-5 mb-2">Course</label>
+                        <select name="course_id" class="form-control">
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="fs-5 mb-2">Phone</label>
+                        <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="fs-5 mb-2">Address</label>
+                        <input type="text" name="address" class="form-control" value="{{ old('address') }}">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button class="btn btn-success mt-3 ms-2" type="submit">Confirm</button>
     </div>
 @endsection

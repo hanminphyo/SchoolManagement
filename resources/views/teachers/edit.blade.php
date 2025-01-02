@@ -15,25 +15,32 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/teachers/' . $teacher->id) }}" method="post">
-            @csrf
-            @method('PUT')
-            <label>Name</label>
-            <input type="text" name="name" class="form-control" value="{{ $teacher->name }}">
-            <br />
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" value="{{ $teacher->email }}">
-            <br />
-            <label>Course</label>
-            <select name="course_id" class="form-control">
-                @foreach ($courses as $course)
-                    <option value="{{ $course->id }}" {{ $course->id == $teacher->course_id ? 'selected' : '' }}>
-                        {{ $course->name }}
-                    </option>
-                @endforeach
-            </select>
-            <br />
-            <button class="btn btn-success" type="submit">Update</button>
-        </form>
+        <div class="container">
+            <form action="{{ url('/teachers/' . $teacher->id) }}" method="post">
+                @method('PUT')
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="fs-5 mt-2 mb-1">Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ $teacher->name }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fs-5 mt-2 mb-1">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ $teacher->email }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fs-5 mt-2 mb-1">Course</label>
+                        <select name="course_id" class="form-control">
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}"
+                                    {{ $course->id == $teacher->course_id ? 'selected' : '' }}>
+                                    {{ $course->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+            </form>
+        </div>
+        <button class="btn btn-success mt-3" type="submit">Update</button>
     </div>
 @endsection

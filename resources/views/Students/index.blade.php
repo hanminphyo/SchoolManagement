@@ -35,12 +35,11 @@
                 @foreach ($students as $student)
                     <tr>
                         <th scope="row">{{ $student['id'] }}</th>
-                        <td>{{ $student->name }}</td>
+                        <td><a href="{{ url('/students/' . $student->id) }}">{{ $student->name }}</a></td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->course->name }}</td>
                         <td>{{ $student->phone }}</td>
                         <td>{{ $student->address }}</td>
-                        <td><a href="{{ url('/students/' . $student->id) }}" class="btn btn-warning">Detail</a></td>
                         @auth
                             <td><a href="{{ url('/students/' . $student->id . '/edit') }}" class="btn btn-warning">Edit</a>
                             </td>

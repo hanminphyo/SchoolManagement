@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <script src="assets/color-modes.js"></script>
+    <script src="{{ asset('assets/color-modes.js') }}"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -118,7 +118,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="assets/dashboard.css" rel="stylesheet" />
+    <link href="{{ asset('assets/dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -260,20 +260,14 @@
             </symbol>
         </svg>
 
-        {{-- <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow py-3" data-bs-theme="dark">
-    
-            
-            Search-Box
+        {{-- <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow py-3" data-bs-theme="dark"> 
+                        Search-Box
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white " href="#">LaraSchool</a>
             <form action="{{ route('students.search') }}" method="GET" id="search-form"
                 class="col-lg-auto mb-3 mb-lg-0 me-lg-3 pe-4 " role="search">
                 <input type="search" id="search-input" class="form-control me-2 " placeholder="Search..."
                     name="query" value="{{ request('query') }}" aria-label="Search">
-            </form>
-
-
-
-          
+            </form>          
         </header> --}}
 
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-py-3 "data-bs-theme="dark">
@@ -298,12 +292,6 @@
                     </li>
                 </ul>
 
-                {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button> --}}
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -316,7 +304,7 @@
                         </form> --}}
 
                         <!-- Authentication Links -->
-                        {{-- @guest
+                        @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -348,7 +336,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest --}}
+                        @endguest
                     </ul>
                 </div>
                 <div id="navbarSearch" class="navbar-search w-100 collapse">
@@ -370,7 +358,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                 data-bs-target="#sidebarMenu" aria-label="Close"></button>
                         </div>
-                        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto ">
                             <ul class="nav flex-column">
                                 @if (Route::has('courses.index'))
                                     <li class="nav-item">
@@ -468,7 +456,7 @@
                                         Sign out
                                     </a>
                                 </li> --}}
-                                @guest
+                                {{-- @guest
                                     @if (Route::has('login'))
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -501,7 +489,7 @@
                                             </form>
                                         </div>
                                     </li>
-                                @endguest
+                                @endguest --}}
                             </ul>
                             {{-- <ul class="navbar-nav ms-auto">
                                 <!-- Authentication Links -->
@@ -573,7 +561,7 @@
             </div>
         </div>
     </div>
-    <script src="assets/bootstrap.bundle.min.js"
+    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
@@ -581,7 +569,7 @@
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous">
     </script>
 
-    <script src="assets/dashboard.js"></script>
+    <script src="{{ asset('assets/dashboard.js') }}"></script>
 
     {{-- JS For search method --}}
     {{-- <script>

@@ -35,27 +35,5 @@
             <br />
             <hr>
         </div>
-        {{-- <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ $student['id'] }}</th>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->email }}</td>
-                    <td>{{ $student->course->name }}</td>
-                    <td>{{ $student->phone }}</td>
-                    <td>{{ $student->address }}</td>
-                </tr>
-            </tbody>
-        </table> --}}
     </div>
 @endsection

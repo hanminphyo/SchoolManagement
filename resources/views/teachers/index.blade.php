@@ -1,15 +1,21 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="mt-2">Teacher List</h1>
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h1 class="mt-3">Teacher List</h1>
+            </div>
+            <div class="col-4">
+                @auth
+                    <a href="{{ url('/teachers/create') }}" class="btn btn-primary  mt-3">Add Teacher</a>
+                @endauth
+            </div>
+        </div>
         @session('info')
             <div class="alert alert-success">
                 {{ session('info') }}
             </div>
         @endsession
-        @auth
-            <a href="{{ url('/teachers/create') }}" class="btn btn-primary mt-2">Add Teacher</a>
-        @endauth
         <div class="container">
             <table class="table table-hover mt-3">
                 <thead>
@@ -25,10 +31,9 @@
                     @foreach ($teachers as $teacher)
                         <tr>
                             <th scope="row">{{ $teacher['id'] }}</th>
-                            <td>{{ $teacher->name }}</td>
+                            <td><a href="{{ url('/teachers/' . $teacher->id) }}">{{ $teacher->name }}</a></td>
                             <td>{{ $teacher->email }}</td>
                             <td>{{ optional($teacher->course)->name ?? 'No Course Assigned' }}</td>
-                            <td><a href="{{ url('/teachers/' . $teacher->id) }}" class="btn btn-warning">Detail</a></td>
                             @auth
                                 <td><a href="{{ url('/teachers/' . $teacher->id . '/edit') }}" class="btn btn-warning ">Edit</a>
                                 </td>

@@ -1,17 +1,23 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="m-4">Class List</h1>
-        @auth
-            <a href="{{ url('/groups/create') }}" class="btn btn-primary mb-3">Add Class</a>
-        @endauth
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h1 class="mt-2">Class List</h1>
+            </div>
+            <div class="col-4">
+                @auth
+                    <a href="{{ url('/groups/create') }}" class="btn btn-primary">Add Class</a>
+                @endauth
+            </div>
+        </div>
         @session('info')
             <div class="alert alert-success">
                 {{ session('info') }}
             </div>
         @endsession
         <div class="container">
-            <table class="table table-hover">
+            <table class="table table-hover mt-4">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

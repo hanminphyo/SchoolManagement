@@ -14,15 +14,17 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/courses') }}" method="post">
-            @csrf
-            <label>Course Name</label>
-            <input type="text" name="course_name" class="form-control" value="{{ old('course_name') }}">
-            <br />
-            <label>Fee</label>
-            <input type="text" name="course_fee" class="form-control" value="{{ old('course_fee') }}">
-            <br />
-            <button class="btn btn-primary" type="submit">Create</button>
-        </form>
+        <div class="container ">
+            <form action="{{ url('/courses') }}" method="post" class="">
+                @csrf
+                <label>Course Name</label>
+                <input type="text" name="course_name" class="form-control" value="{{ old('course_name') }}">
+
+                <label>Fee</label>
+                <input type="text" name="course_fee" class="form-control" value="{{ old('course_fee') }}">
+
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </div>
     </div>
 @endsection
