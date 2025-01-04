@@ -2,9 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <script src="{{ asset('assets/color-modes.js') }}"></script>
+    <script src="public/assets/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,7 +16,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
 
-    <link href="assets/bootstrap.min.css" rel="stylesheet"
+    <link href="public/assets/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
     <!-- Fonts -->
@@ -118,7 +119,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/dashboard.css') }}" rel="stylesheet" />
+    <link href="public/assets/dashboard.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -151,7 +152,6 @@
                 </svg>
                 <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
             </button>
-
             <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
                 <li>
                     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
@@ -165,7 +165,6 @@
                         </svg>
                     </button>
                 </li>
-
                 <li>
                     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
                         aria-pressed="false">
@@ -178,7 +177,6 @@
                         </svg>
                     </button>
                 </li>
-
                 <li>
                     <button type="button" class="dropdown-item d-flex align-items-center active"
                         data-bs-theme-value="auto" aria-pressed="true">
@@ -270,9 +268,9 @@
             </form>          
         </header> --}}
 
-        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-py-3 "data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-light shadow-py-3 ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/users') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Lara School') }}
                 </a>
                 <ul class="navbar-nav flex-row d-md-none">
@@ -303,40 +301,14 @@
                                 aria-label="Search">
                         </form> --}}
 
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                        <div class="container-fluid mt-3">
+                            <form action="{{ route('students.index') }}" method="GET" class="d-flex"
+                                role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" name="search"
+                                    value="{{ request('search') }}" aria-label="Search">
+                                <button class="btn btn-success" type="submit">Search</button>
+                            </form>
+                        </div>
                     </ul>
                 </div>
                 <div id="navbarSearch" class="navbar-search w-100 collapse">
@@ -450,22 +422,16 @@
                                         Settings
                                     </a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <i class="bi bi-door-closed"></i>
-                                        Sign out
-                                    </a>
-                                </li> --}}
-                                {{-- @guest
-                                    @if (Route::has('login'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @endif
-
+                                <hr>
+                                @guest
                                     @if (Route::has('register'))
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </li>
+                                    @endif
+                                    @if (Route::has('login'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         </li>
                                     @endif
                                 @else
@@ -489,88 +455,23 @@
                                             </form>
                                         </div>
                                     </li>
-                                @endguest --}}
-                            </ul>
-                            {{-- <ul class="navbar-nav ms-auto">
-                                <!-- Authentication Links -->
-                                @guest
-                                    @if (Route::has('login'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @endif
-
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                        </li>
-                                    @endif
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                            role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }}
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
                                 @endguest
-                            </ul> --}}
+                            </ul>
                         </div>
                     </div>
                 </div>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    {{-- <div
-                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h1 class="h2">Dashboard</h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    Share
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    Export
-                                </button>
-                            </div>
-                            <button type="button"
-                                class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-                                <svg class="bi">
-                                    <use xlink:href="#calendar3" />
-                                </svg>
-                                This week
-                            </button>
-                        </div>
-                    </div> --}}
-                    {{-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> --}}
                     @yield('content')
                 </main>
-
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
+
+    <script src="public/assets/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
-        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous">
-    </script>
-
-    <script src="{{ asset('assets/dashboard.js') }}"></script>
-
+    <script src="public/assets/dashboard.js"></script>
     {{-- JS For search method --}}
     {{-- <script>
         document.getElementById('search-input').addEventListener('keypress', function(event) {
@@ -583,53 +484,3 @@
 </body>
 
 </html>
-
-
-{{-- <div class="dropdown">
-                            <a href="#"
-                                class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                                    class="rounded-circle me-2">
-                                <strong>mdo</strong>
-                            </a>
-                            <ul class="dropdown-menu text-small shadow">
-                                <li><a class="dropdown-item" href="#">New project...</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                @guest
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                            role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }}
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
-                                @endguest
-                            </ul>
-                        </div> --}}
-
-
-
-{{-- <div class="col-8">
-                <main class="py-4">
-                    @yield('content')
-                </main>
-                </div> --}}

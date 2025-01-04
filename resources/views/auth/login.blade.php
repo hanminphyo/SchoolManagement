@@ -78,6 +78,7 @@
         </div>
     </div>
 @endsection --}}
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -89,7 +90,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>Lara School</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
 
@@ -181,6 +182,8 @@
             display: block !important;
         }
     </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <link href="{{ asset('assets/sign-in.css') }}" rel="stylesheet">
 </head>
@@ -276,12 +279,15 @@
                 </div>
             </div>
             <div class="row mb-3">
-
                 <div class="col">
-                    <input id="password" type="password"
-                        class="form-control @error('password') is-invalid @enderror" name="password"
-                        placeholder="Password..." required autocomplete="current-password">
-
+                    <div class="input-group">
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror " name="password"
+                            placeholder="Password..." required autocomplete="current-password">
+                        <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()">
+                            <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                        </span>
+                    </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -320,10 +326,28 @@
         @endif
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
     </main>
+
     <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
+    {{-- Password Toogler Function --}}
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            }
+        }
+    </script>
 </body>
 
 </html>

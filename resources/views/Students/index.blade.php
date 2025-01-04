@@ -7,12 +7,13 @@
             </div>
             <div class="col-4">
                 @auth
-                    <a href="{{ url('/students/create') }}" class="btn btn-primary  mt-3">Add Student</a>
+                    <a href="{{ url('/students/create') }}" class="btn btn-primary  mt-3"><i
+                            class="bi bi-person-plus-fill me-2"></i>Add Student</a>
                 @endauth
             </div>
         </div>
         @session('info')
-            <div class="alert alert-success">
+            <div class="alert alert-primary">
                 {{ session('info') }}
             </div>
         @endsession
@@ -41,13 +42,15 @@
                         <td>{{ $student->phone }}</td>
                         <td>{{ $student->address }}</td>
                         @auth
-                            <td><a href="{{ url('/students/' . $student->id . '/edit') }}" class="btn btn-warning">Edit</a>
+                            <td><a href="{{ url('/students/' . $student->id . '/edit') }}" class="btn btn-warning">
+                                    <i class="bi bi-pencil-square me-1"></i>Edit</a></a>
                             </td>
                             <td>
                                 <form action="{{ url('/students/' . $student->id) }}"method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bi bi-trash3 me-1"></i>Delete</button>
                                 </form>
                             </td>
                         @endauth

@@ -6,39 +6,78 @@
             <i class="bi bi-arrow-left"></i>
             Go Back
         </a>
-        <div class="container">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Teacher Name</th>
-                        <th scope="col">Days of Attendence</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">End Time</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <th scope="row">{{ $group['id'] }}</th>
-                        <td>{{ $group->course->name }}</td>
-                        <td>{{ $group->teacher->name }}</td>
-                        <td>{{ $group->days_in_a_week }}</td>
-                        <td>{{ $group->start_time }}</td>
-                        <td>{{ $group->end_time }}</td>
-                        <td>{{ $group->start_date }}</td>
-                        <td>{{ $group->end_date }}</td>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-            </table>
+        {{-- <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <label class="mx-4">Class Name:</label>
+                    <span class="ms-3 fw-bold">{{ $group->name }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">Course Name:</label>
+                    <span class="ms-2 fw-bold">{{ $group->course->name }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">Teacher Name:</label>
+                    <span class="ms-1 fw-bold">{{ $group->teacher->name }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4 me-4">Days :</label>
+                    <span class="ms-5 fw-bold">{{ $group->days_in_a_week }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">Start Time:</label>
+                    <span class="pe-4 fw-bold">{{ $group->start_time }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">End Time:</label>
+                    <span class="pe-4 fw-bold">{{ $group->end_time }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">Start Date:</label>
+                    <span class="pe-4 fw-bold">{{ $group->start_date }}</span>
+                </div>
+                <div class="col-12">
+                    <label class="mx-4">End Date:</label>
+                    <span class="pe-4 fw-bold">{{ $group->end_date }}</span>
+                </div>
+            </div>
+        </div> --}}
+        <div class="container mt-4">
+            <div class="row g-3">
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3">Class Name:</label>
+                    <span class="fw-bold">{{ $group->name }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">Course Name:</label>
+                    <span class="fw-bold">{{ $group->course->name }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">Teacher Name:</label>
+                    <span class="fw-bold">{{ $group->teacher->name }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">Days:</label>
+                    <span class="fw-bold">{{ $group->days_in_a_week }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">Start Time:</label>
+                    <span class="fw-bold">{{ $group->start_time }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">End Time:</label>
+                    <span class="fw-bold">{{ $group->end_time }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">Start Date:</label>
+                    <span class="fw-bold">{{ $group->start_date }}</span>
+                </div>
+                <div class="col-12 d-flex align-items-start">
+                    <label class="form-label me-3 ">End Date:</label>
+                    <span class="fw-bold">{{ $group->end_date }}</span>
+                </div>
+            </div>
         </div>
     </div>
+    <hr>
 @endsection

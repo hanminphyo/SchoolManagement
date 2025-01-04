@@ -13,10 +13,17 @@ class Student extends Model
         'name',
         'email',
         'course_id',
+        'phone',
+        'address'
     ];
 
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id');
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
     }
 }

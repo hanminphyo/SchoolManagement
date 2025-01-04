@@ -20,6 +20,10 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mt-2 mb-3">
+                        <label class="fs-5 mb-2">Class Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                    </div>
+                    <div class="col-md-6 mt-2 mb-3">
                         <label class="fs-5 mb-2">Course Name</label>
                         <select name="course_id" class="form-control">
                             @foreach ($courses as $course)
@@ -35,18 +39,15 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 mt-2 mb-3">
-                        <label class="fs-5 mb-2">Date</label><br />
-                        {{-- <div class="form-control"> --}}
-                        <label><input type="checkbox" name="days[]" value="Mon" class="fs-6 mx-1"> Mon</label>
-                        <label><input type="checkbox" name="days[]" value="Tue" class="fs-6 mx-1"> Tue</label>
-                        <label><input type="checkbox" name="days[]" value="Wed" class="fs-6 mx-1"> Wed</label>
-                        <label><input type="checkbox" name="days[]" value="Thu" class="fs-6 mx-1"> Thu</label>
-                        <label><input type="checkbox" name="days[]" value="Fri" class="fs-6 mx-1"> Fri</label>
-                        <label><input type="checkbox" name="days[]" value="Sat" class="fs-6 mx-1"> Sat</label>
-                        <label><input type="checkbox" name="days[]" value="Sun" class="fs-6 mx-1"> Sun</label>
-                        {{-- </div> --}}
-                    </div>
+                    {{-- <div class="col-md-6 mt-2 mb-3">
+                        <label class="fs-5 mb-2">Student Name</label>
+                        <select name="student_id" class="form-control">
+                            @foreach ($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->name }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+
                     <div class="col-md-6 mt-2 mb-3">
                         <label class="fs-5 mt-2">Start Time</label>
                         <input type="time" name="start_time" class="form-control" value="{{ old('start_time') }}">
@@ -63,8 +64,22 @@
                         <label class="fs-5 mb-2">End Date</label>
                         <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
                     </div>
+                    <div class="col-md-6 mt-2 mb-3">
+                        <label class="fs-5 mb-2">Days</label><br />
+                        {{-- <div class="form-control"> --}}
+                        <label><input type="checkbox" name="days[]" value="Mon" class="fs-6 mx-1"> Mon</label>
+                        <label><input type="checkbox" name="days[]" value="Tue" class="fs-6 mx-1"> Tue</label>
+                        <label><input type="checkbox" name="days[]" value="Wed" class="fs-6 mx-1"> Wed</label>
+                        <label><input type="checkbox" name="days[]" value="Thu" class="fs-6 mx-1"> Thu</label>
+                        <label><input type="checkbox" name="days[]" value="Fri" class="fs-6 mx-1"> Fri</label>
+                        <label><input type="checkbox" name="days[]" value="Sat" class="fs-6 mx-1"> Sat</label>
+                        <label><input type="checkbox" name="days[]" value="Sun" class="fs-6 mx-1"> Sun</label>
+                        {{-- </div> --}}
+                    </div>
+                    <div>
+                        <button class="btn btn-success mt-3" type="submit">Create</button>
+                    </div>
             </form>
         </div>
-        <button class="btn btn-success mt-3" type="submit">Create</button>
     </div>
 @endsection

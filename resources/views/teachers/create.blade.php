@@ -29,7 +29,7 @@
                 @endforeach
             </select>
             <br />
-            <button class="btn btn-success" type="submit">Confirm</button>
+            <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-1"></i>Confirm</button>
         </form>
     </div>
 @endsection

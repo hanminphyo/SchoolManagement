@@ -16,7 +16,6 @@ Route::get('/', function () {
 
 //Student Management//
 Route::resource('students', StudentController::class);
-Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
 
 // Route::get('students', [StudentController::class, 'index']);
 // Route::get('/students/create', [StudentController::class, 'create']);

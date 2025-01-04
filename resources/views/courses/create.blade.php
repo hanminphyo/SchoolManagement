@@ -17,13 +17,15 @@
         <div class="container ">
             <form action="{{ url('/courses') }}" method="post" class="">
                 @csrf
-                <label>Course Name</label>
+                <label class="fs-5 mb-1 mt-3">Course Name</label>
                 <input type="text" name="course_name" class="form-control" value="{{ old('course_name') }}">
 
-                <label>Fee</label>
+                <label class="fs-5 mb-1 mt-3">Course Outline</label>
+                <textarea name="outlines" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label class="fs-5 mb-1 mt-3">Fee</label>
                 <input type="text" name="course_fee" class="form-control" value="{{ old('course_fee') }}">
 
-                <button class="btn btn-primary" type="submit">Create</button>
+                <button class="btn btn-success mt-3" type="submit"><i class="bi bi-check-circle me-1"></i>Confirm</button>
             </form>
         </div>
     </div>

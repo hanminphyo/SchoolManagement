@@ -8,10 +8,14 @@
         </a>
         <div class="container mt-4">
             <form>
-                <label>Teacher Name</label>
+                <label class="fs-5">Teacher Name</label>
                 <input type="text" name="name" class="form-control" value="{{ $teacher->name }}" readonly>
                 <br />
-                <label>Teacher Email</label>
+                <label class="fs-5">Course</label>
+                <input type="text" name="name" class="form-control" value="{{ $teacher->course->name }}" readonly>
+                <br />
+
+                <label class="fs-5">Teacher Email</label>
                 <input type="email" name="email" class="form-control" value="{{ $teacher->email }}" readonly>
                 <br />
             </form>

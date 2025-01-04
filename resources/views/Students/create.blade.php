@@ -43,8 +43,9 @@
                         <input type="text" name="address" class="form-control" value="{{ old('address') }}">
                     </div>
                 </div>
+                <button class="btn btn-success mt-3 ms-2" type="submit">
+                    <i class="bi bi-check-circle me-1"></i>Confirm</button>
             </form>
         </div>
-        <button class="btn btn-success mt-3 ms-2" type="submit">Confirm</button>
     </div>
 @endsection

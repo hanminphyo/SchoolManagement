@@ -21,10 +21,12 @@
             <label class="fs-5">Course Name</label>
             <input type="text" name="name" class="form-control" value="{{ $course->name }}">
             <br />
+            <label>Course Outline</label>
+            <textarea name="outlines" class="form-control" id="floatingTextarea2" style="height: 100px">{{ $course->outlines }}</textarea>
             <label class="fs-5">Fee</label>
             <input type="text" name="fee" class="form-control" value="{{ $course->fee }}">
             <br />
-            <button class="btn btn-success" type="submit">Update</button>
+            <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-1"></i>Update</button>
         </form>
     </div>
 @endsection

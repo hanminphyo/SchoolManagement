@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Group;
+use App\Models\Student;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -23,14 +25,21 @@ class GroupController extends Controller
         // dd($teachers);
         $courses  = Course::all();
         // dd($courses);
+        // $students  = Student::all();
+        // dd($students);
 
-        return view('groups.index')->with('groups', $groups)->with('teachers', $teachers)->with('courses', $courses);
+        return view('groups.index')
+            ->with('groups', $groups)
+            ->with('teachers', $teachers)
+            ->with('courses', $courses);
+        // ->with('students', $students);
     }
 
     public function create()
     {
         $courses = Course::all();
         $teachers = Teacher::all();
+        // $students = Student::all();
         return view('groups.create')->with('courses', $courses)->with('teachers', $teachers);
     }
 
@@ -43,8 +52,10 @@ class GroupController extends Controller
     public function store()
     {
         $validator = validator(request()->all(), [
+            'name' => 'required',
             'course_id' => 'required',
             'teacher_id' => 'required',
+            // 'student_id' => 'required',
             'days' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
@@ -56,13 +67,15 @@ class GroupController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $group = new Group();
+        $group->name = request()->name;
         $group->course_id = request()->course_id;
         $group->teacher_id = request()->teacher_id;
+        // $group->student_id = request()->student_id;
         $group->days_in_a_week = implode(', ', request()->days);
         $group->start_time = request()->start_time;
         $group->end_time = request()->end_time;
-        $group->start_date = request()->start_date;
-        $group->end_date = request()->end_date;
+        $group->start_date = Carbon::createFromFormat('Y-m-d', request()->start_date)->format('d/m/y');
+        $group->end_date = Carbon::createFromFormat('Y-m-d', request()->end_date)->format('d/m/y');
         $group->save();
         return redirect('/groups')->with('info', 'A Class has been created');
     }
@@ -86,18 +99,18 @@ class GroupController extends Controller
         $group = Group::find($id);
         $courses = Course::all();
         $teachers = Teacher::all();
+        // $students = Student::all();
         return view('groups.create')
             ->with('group', $group)
             ->with('courses', $courses)
             ->with('teachers', $teachers);
+        // ->with('students', $students);
     }
 
     public function destroy($id)
     {
 
         $group = Group::find($id);
-        $course = Course::find($id);
-        $teacher = Teacher::find($id);
         $group->delete();
         return redirect('/groups')->with('info', "A Class has been Deleted");
     }

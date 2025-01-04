@@ -7,7 +7,9 @@
             </div>
             <div class="col-4">
                 @auth
-                    <a href="{{ url('/teachers/create') }}" class="btn btn-primary  mt-3">Add Teacher</a>
+                    <a href="{{ url('/teachers/create') }}" class="btn btn-primary mt-3"><i
+                            class="bi bi-person-plus-fill me-2"></i>Add
+                        Teacher</a>
                 @endauth
             </div>
         </div>
@@ -35,13 +37,15 @@
                             <td>{{ $teacher->email }}</td>
                             <td>{{ optional($teacher->course)->name ?? 'No Course Assigned' }}</td>
                             @auth
-                                <td><a href="{{ url('/teachers/' . $teacher->id . '/edit') }}" class="btn btn-warning ">Edit</a>
+                                <td><a href="{{ url('/teachers/' . $teacher->id . '/edit') }}" class="btn btn-warning ">
+                                        <i class="bi bi-pencil-square me-1"></i>Edit</a>
                                 </td>
                                 <td>
                                     <form action="{{ url('/teachers/' . $teacher->id) }}"method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="bi bi-trash3 me-1"></i>Delete</button>
                                     </form>
                                 </td>
                             @endauth

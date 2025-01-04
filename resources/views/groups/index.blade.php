@@ -7,7 +7,8 @@
             </div>
             <div class="col-4">
                 @auth
-                    <a href="{{ url('/groups/create') }}" class="btn btn-primary">Add Class</a>
+                    <a href="{{ url('/groups/create') }}" class="btn btn-primary mt-3">
+                        <i class="bi bi-plus-square me-2"></i>Add Class</a>
                 @endauth
             </div>
         </div>
@@ -21,8 +22,10 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Class Name</th>
                         <th scope="col">Course Name</th>
                         <th scope="col">Teacher Name</th>
+                        {{-- <th scope="col">Students</th> --}}
                         <th scope="col">Days of Attendence</th>
                         <th scope="col">Start Time</th>
                         <th scope="col">End Time</th>
@@ -34,22 +37,29 @@
                 <tbody>
                     @foreach ($groups as $group)
                         <tr>
-                            <th scope="row">{{ $group['id'] }}</th>
-                            <td>{{ $group->course->name }}</td>
+                            <th scope="row">{{ $group->id }}</th>
+                            <td>
+                                <a href="{{ url('/groups/' . $group->id) }}">
+                                    {{ $group->name }}</a>
+                            </td>
+                            <td>{{ $group->course->name }} </td>
                             <td>{{ $group->teacher->name }}</td>
+                            {{-- <td class="ms-3">( {{ count($group->student) }} )</td> --}}
                             <td>{{ $group->days_in_a_week }}</td>
                             <td>{{ $group->start_time }}</td>
                             <td>{{ $group->end_time }}</td>
                             <td>{{ $group->start_date }}</td>
                             <td>{{ $group->end_date }}</td>
-                            <td class="d-flex"><a href="{{ url('/groups/' . $group->id) }}"
-                                    class="btn btn-warning me-2">Detail</a>
+                            <td class="d-flex">
                                 @auth
-                                    <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">Edit</a>
+                                    <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">
+                                        <i class="bi bi-pencil-square"></i>Edit</a>
+
                                     <form action="{{ url('/groups/' . $group->id) }}"method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger me-2">Delete</button>
+                                        <button type="submit" class="btn btn-danger me-2">
+                                            <i class="bi bi-trash3"></i>Delete</button>
                                     </form>
                                 @endauth
                             </td>

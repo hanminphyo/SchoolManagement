@@ -121,7 +121,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="assets/dashboard.css" rel="stylesheet" />
+    <link href="{{ asset('assets/sing-in.css') }}" rel="stylesheet" />
 </head>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
@@ -199,7 +199,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Register') }}</div>
 
-                    <div class="card-body">
+                    <div class="card-body ">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="row mb-3">
@@ -236,14 +236,20 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row mb-3 ">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                <div class="col-md-6 ">
+                                    <div class="input-group">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            name="password" required autocomplete="new-password">
+                                        <span class="input-group-text" style="cursor: pointer;"
+                                            onclick="togglePassword()">
+                                            <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                                        </span>
+                                    </div>
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -251,16 +257,24 @@
                                         </span>
                                     @enderror
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                <div class="col-md-6 ">
+                                    <div class="input-group">
+                                        <input id="password-confirm" type="password" class="form-control"
+                                            name="password_confirmation" required autocomplete="new-password">
+                                        <span class="input-group-text" style="cursor: pointer;"
+                                            onclick="togglePasswordConfirm()">
+                                            <i id="toggleIconConfirm" class="bi bi-eye-slash"></i>
+                                        </span>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
@@ -286,6 +300,40 @@
             </div>
         </div>
     </div>
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            }
+        }
+
+        function togglePasswordConfirm() {
+            const passwordConfirmField = document.getElementById('password-confirm');
+            const toggleIconConfirm = document.getElementById('toggleIconConfirm');
+
+            if (passwordConfirmField.type === 'password') {
+                passwordConfirmField.type = 'text';
+                toggleIconConfirm.classList.remove('bi-eye-slash');
+                toggleIconConfirm.classList.add('bi-eye');
+            } else {
+                passwordConfirmField.type = 'password';
+                toggleIconConfirm.classList.remove('bi-eye');
+                toggleIconConfirm.classList.add('bi-eye-slash');
+            }
+        }
+    </script>
+    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 {{-- @endsection --}}

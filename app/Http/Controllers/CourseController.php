@@ -44,6 +44,7 @@ class CourseController extends Controller
         $validator = validator(request()->all(), [
             'course_name' => 'required',
             'course_fee' => 'required',
+            'outlines' => 'required',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -53,6 +54,7 @@ class CourseController extends Controller
         $course->name = request()->course_name;
         $courseName = $course->name;
         $course->fee = request()->course_fee;
+        $course->outlines = request()->outlines;
         $course->save();
         return redirect('/courses')->with('info', "' $courseName '  has been created!");
     }
@@ -69,6 +71,7 @@ class CourseController extends Controller
         $validator = validator(request()->all(), [
             'name' => 'required',
             'fee' => 'required',
+            'outlines' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -78,7 +81,19 @@ class CourseController extends Controller
         $course->name = request()->name;
         $courseName = $course->name;
         $course->fee = request()->fee;
+        $course->outlines = request()->outlines;
         $course->save();
         return redirect('/courses')->with('info',  " '$courseName'  has been Updated");
+    }
+
+    public function storeOutlines(Request $request)
+    {
+        $request->validate([
+            'outlines' => 'nullable|string|max:500',
+        ]);
+        $outlineString = implode(', ', $request->outlines);
+        Course::create([
+            'outlines' => $outlineString,
+        ]);
     }
 }

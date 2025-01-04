@@ -14,10 +14,18 @@ class StudentController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $students = Student::all();
         // dd($students);
+        // $query = $request->input('search');
+        // $students = Student::query();
+        // dd($students);
+        // if ($query) {
+        //     $students = $students->where('name', 'like', '%' . $query . '%')
+        //         ->orWhere('email', 'like', '%' . $query . '%')
+        //         ->orWhere('course_id', 'like', '%' . $query . '%');
+        // }
         return view('students.index', ['students' => $students]);
     }
 
@@ -98,15 +106,15 @@ class StudentController extends Controller
         $student->save();
         return redirect('/students')->with('info',  " '$studentName'  has been Updated");
     }
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
 
-        $students = Student::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('email', 'LIKE', "%{$query}%")
-            ->orWhere('class', 'LIKE', "%{$query}%")
-            ->get();
-
-        return view('students.index')->with(['students' => $students, 'query' => $query]);;
-    }
+    // public function search(Request $request)
+    // {
+    //     $query = $request->input('query');
+    //     $students = Student::where('name', 'LIKE', "%{$query}%")
+    //         ->orWhere('email', 'LIKE', "%{$query}%")
+    //         ->orWhere('class', 'LIKE', "%{$query}%")
+    //         ->get();
+    //     // dd($students);
+    //     return view('students.index')->with(['students' => $students, 'query' => $query]);;
+    // }
 }

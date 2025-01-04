@@ -48,8 +48,9 @@
                         <input type="text" name="address" class="form-control" value="{{ $student->address }}">
                     </div>
                 </div>
+                <button class="btn btn-success ms-2 mt-3" type="submit">
+                    <i class="bi bi-check-circle me-1"></i>Update</button>
             </form>
         </div>
-        <button class="btn btn-success ms-2 mt-3" type="submit">Update</button>
     </div>
 @endsection

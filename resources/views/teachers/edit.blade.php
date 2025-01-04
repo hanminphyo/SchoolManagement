@@ -41,6 +41,6 @@
                     </div>
             </form>
         </div>
-        <button class="btn btn-success mt-3" type="submit">Update</button>
+        <button class="btn btn-success mt-3" type="submit"><i class="bi bi-check-circle me-1"></i>Update</button>
     </div>
 @endsection
