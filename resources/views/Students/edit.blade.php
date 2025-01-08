@@ -4,7 +4,7 @@
         <h1>Student List</h1>
         <a class="icon-link icon-link-hover mb-2" href="{{ url('/students') }}">
             <i class="bi bi-arrow-left"></i>
-            Go Back
+            Back
         </a>
         @if ($errors->any())
             <div class="alert alert-warning">
@@ -16,7 +16,7 @@
             </div>
         @endif
         <div class="container">
-            <form action="{{ url('/students/' . $student->id) }}" method="post">
+            <form action="{{ url('/students/' . $student->id) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row">
@@ -47,9 +47,18 @@
                         <label class="fs-5 mb-2">Address</label>
                         <input type="text" name="address" class="form-control" value="{{ $student->address }}">
                     </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="fs-5 mb-2">Image</label>
+                        <input type="file" name="image" class="form-control" accept="image/*" />
+                        @if ($student->image)
+                            <img src="{{ Storage::url('students/' . $student->image) }}" class="img-thumbnail" />
+                        @else
+                            <img src="{{ asset('images/noimage.png ') }}" class="img-thumbnail" />
+                        @endif
+                    </div>
                 </div>
                 <button class="btn btn-success ms-2 mt-3" type="submit">
-                    <i class="bi bi-check-circle me-1"></i>Update</button>
+                    <i class="bi bi-file-earmark-arrow-up-fill me-1"></i>Update</button>
             </form>
         </div>
     </div>

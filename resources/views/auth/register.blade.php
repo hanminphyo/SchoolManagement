@@ -35,7 +35,7 @@
     <meta name="theme-color" content="#712cf9" />
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
     <style>
         .bd-placeholder-img {
@@ -121,7 +121,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/sing-in.css') }}" rel="stylesheet" />
+    {{-- <link href="" rel="stylesheet" /> --}}
+    <link href="{{ asset('assets/sign-in.css') }}" rel="stylesheet">
 </head>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
@@ -277,16 +278,7 @@
 
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="usertype" class="col-md-4 text-md-end">User Type</label>
-                                <div class="col-md-6">
-                                    <select id="usertype" name="usertype" required class="form-control">
-                                        <option value="admin">Admin</option>
-                                        <option value="teacher">Teacher</option>
-                                        <option value="student">Student</option>
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -300,6 +292,9 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script>
         function togglePassword() {
             const passwordField = document.getElementById('password');
@@ -331,9 +326,7 @@
             }
         }
     </script>
-    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+
 </body>
 
 {{-- @endsection --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -15,7 +16,8 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('courses.index', ['courses' => $courses]);
+        $students = Student::all();
+        return view('courses.index')->with('courses', $courses)->with('studnets', $students);
     }
 
     public function create()
@@ -95,5 +97,12 @@ class CourseController extends Controller
         Course::create([
             'outlines' => $outlineString,
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+        $courses = Course::where('name', 'like', '%' . $query . '%')->get();
+        return view('courses.index', ['courses' => $courses]);
     }
 }

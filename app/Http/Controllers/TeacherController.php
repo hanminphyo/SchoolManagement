@@ -12,12 +12,12 @@ class TeacherController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
     }
-    
+
     public function index()
     {
-
-        $teachers = Teacher::with('course')->get();
-        return view('teachers.index')->with('teachers', $teachers);
+        $teachers = Teacher::all();
+        $courses = Course::all();
+        return view('teachers.index')->with('teachers', $teachers)->with('courses', $courses);
     }
 
     public function create()
@@ -36,8 +36,9 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         $teacher = Teacher::find($id);
+        $teacherName = $teacher->name;
         $teacher->delete();
-        return redirect('/teachers');
+        return redirect('/teachers')->with('info', "'$teacherName'  has been Deleted");
     }
 
     public function store()
@@ -86,5 +87,14 @@ class TeacherController extends Controller
         $teacher->course_id = request()->course_id;
         $teacher->save();
         return redirect('/teachers')->with('info', "'$teacherName' has been Update");
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $teachers = Teacher::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->get();
+        return view('teachers.index')->with(['teachers' => $teachers, 'query' => $query]);
     }
 }

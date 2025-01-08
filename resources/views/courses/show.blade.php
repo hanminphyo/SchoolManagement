@@ -4,7 +4,7 @@
         <h1 class="mt-2">Course List</h1>
         <a class="icon-link icon-link-hover" href="{{ url('/courses') }}">
             <i class="bi bi-arrow-left"></i>
-            Go Back
+            Back
         </a>
         <div class="container mt-4">
             <label class="fs-5 fw-bold">Course Name</label>

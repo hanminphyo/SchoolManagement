@@ -93,8 +93,6 @@
     <title>Lara School</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
     <link href="{{ asset('assets/bootstrap.min.css') }}" rel="stylesheet"

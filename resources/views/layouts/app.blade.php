@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <script src="public/assets/color-modes.js"></script>
+    <script src="{{ asset('assets/color-modes.js') }}"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
 
-    <link href="public/assets/bootstrap.min.css" rel="stylesheet"
+    <link href="{{ asset('assets/bootstrap.min.css') }}" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
     <!-- Fonts -->
@@ -119,7 +119,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="public/assets/dashboard.css" rel="stylesheet" />
+    <link href="{{ asset('public/assets/dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -258,15 +258,6 @@
             </symbol>
         </svg>
 
-        {{-- <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow py-3" data-bs-theme="dark"> 
-                        Search-Box
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white " href="#">LaraSchool</a>
-            <form action="{{ route('students.search') }}" method="GET" id="search-form"
-                class="col-lg-auto mb-3 mb-lg-0 me-lg-3 pe-4 " role="search">
-                <input type="search" id="search-input" class="form-control me-2 " placeholder="Search..."
-                    name="query" value="{{ request('query') }}" aria-label="Search">
-            </form>          
-        </header> --}}
 
         <nav class="navbar navbar-expand-md navbar-light shadow-py-3 ">
             <div class="container">
@@ -274,13 +265,7 @@
                     {{ config('app.name', 'Lara School') }}
                 </a>
                 <ul class="navbar-nav flex-row d-md-none">
-                    <li class="nav-item text-nowrap">
-                        <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false"
-                            aria-label="Toggle search">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </li>
+
                     <li class="nav-item text-nowrap">
                         <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -289,32 +274,6 @@
                         </button>
                     </li>
                 </ul>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        {{-- Search-Box --}}
-                        {{-- <form action="{{ route('students.search') }}" method="GET" id="search-form"
-                            class="col-lg-auto mb-3 mb-lg-0 me-lg-3 pe-4 " role="search">
-                            <input type="search" id="search-input" class="form-control me-2 "
-                                placeholder="Search..." name="query" value="{{ request('query') }}"
-                                aria-label="Search">
-                        </form> --}}
-
-                        <div class="container-fluid mt-3">
-                            <form action="{{ route('students.index') }}" method="GET" class="d-flex"
-                                role="search">
-                                <input class="form-control me-2" type="search" placeholder="Search" name="search"
-                                    value="{{ request('search') }}" aria-label="Search">
-                                <button class="btn btn-success" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </ul>
-                </div>
-                <div id="navbarSearch" class="navbar-search w-100 collapse">
-                    <input class="form-control w-100 rounded-0 border-0" type="search" placeholder="Search"
-                        aria-label="Search" />
-                </div>
             </div>
         </nav>
 
@@ -363,66 +322,9 @@
                                     </li>
                                 @endif
                             </ul>
-
-                            {{-- <h6
-                                class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                                <span>Saved reports</span>
-                                <a class="link-secondary" href="#" aria-label="Add a new report">
-                                    <svg class="bi">
-                                        <use xlink:href="#plus-circle" />
-                                    </svg>
-                                    <i class="bi bi-plus-circle"></i>
-                                </a>
-                            </h6>
-                            <ul class="nav flex-column mb-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <svg class="bi">
-                                            <use xlink:href="#file-earmark-text" />
-                                        </svg>
-                                        <i class="bi bi-file-earmark-text"></i>
-                                        Current month
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <svg class="bi">
-                                            <use xlink:href="#file-earmark-text" />
-                                        </svg>
-                                        <i class="bi bi-file-earmark-text"></i>
-                                        Last quarter
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <svg class="bi">
-                                            <use xlink:href="#file-earmark-text" />
-                                        </svg>
-                                        <i class="bi bi-file-earmark-text"></i>
-                                        Social engagement
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <svg class="bi">
-                                            <use xlink:href="#file-earmark-text" />
-                                        </svg>
-                                        <i class="bi bi-file-earmark-text"></i>
-                                        Year-end sale
-                                    </a>
-                                </li>
-                            </ul> --}}
-
                             <hr class="my-3" />
 
                             <ul class="nav flex-column mb-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                        Settings
-                                    </a>
-                                </li>
-                                <hr>
                                 @guest
                                     @if (Route::has('register'))
                                         <li class="nav-item">
@@ -468,19 +370,25 @@
         </div>
     </div>
 
-    <script src="public/assets/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="{{ asset('public/assets/bootstrap.bundle.min.js') }}">
+        integrity = "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin = "anonymous" >
     </script>
-    <script src="public/assets/dashboard.js"></script>
+
+    <script src="{{ asset('assets/dashboard.js') }}"></script>
+    
     {{-- JS For search method --}}
-    {{-- <script>
-        document.getElementById('search-input').addEventListener('keypress', function(event) {
+    <script>
+        document.getElementById('search-input').addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 document.getElementById('search-form').submit();
             }
         });
-    </script> --}}
+    </script>
+
+    {{-- JS For delete modal --}}
+    <script src="{{ asset('assets/delete-modal.js') }}"></script>
 </body>
 
 </html>

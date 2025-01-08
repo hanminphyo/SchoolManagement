@@ -111,7 +111,16 @@ class GroupController extends Controller
     {
 
         $group = Group::find($id);
+        $className = $group->name;
         $group->delete();
-        return redirect('/groups')->with('info', "A Class has been Deleted");
+        return redirect('/groups')->with('info', "'$className' has been Deleted");
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $groups = Group::where('name', 'LIKE', "%{$query}%")
+            ->get();
+        return view('groups.index')->with(['groups' => $groups, 'query' => $query]);
     }
 };

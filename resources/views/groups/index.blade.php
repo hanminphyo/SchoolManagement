@@ -1,19 +1,22 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-4">
-                <h1 class="mt-2">Class List</h1>
-            </div>
-            <div class="col-4">
-                @auth
-                    <a href="{{ url('/groups/create') }}" class="btn btn-primary mt-3">
-                        <i class="bi bi-plus-square me-2"></i>Add Class</a>
-                @endauth
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-between mt-2">
+                <h1>Class List</h1>
+                <form action="{{ route('groups.search') }}" method="GET" id="search-form"
+                    class="col-lg-auto mb-lg-0 me-lg-3 pe-4" role="search">
+                    <input type="search" id="search-input" class="form-control" placeholder="Search..." name="query"
+                        value="{{ request('query') }}" aria-label="Search">
+                </form>
             </div>
         </div>
+        @auth
+            <a href="{{ url('/groups/create') }}" class="btn btn-primary mt-3">
+                <i class="bi bi-plus-square me-2"></i>Add Class</a>
+        @endauth
         @session('info')
-            <div class="alert alert-success">
+            <div class="alert alert-success mt-3">
                 {{ session('info') }}
             </div>
         @endsession
@@ -25,7 +28,6 @@
                         <th scope="col">Class Name</th>
                         <th scope="col">Course Name</th>
                         <th scope="col">Teacher Name</th>
-                        {{-- <th scope="col">Students</th> --}}
                         <th scope="col">Days of Attendence</th>
                         <th scope="col">Start Time</th>
                         <th scope="col">End Time</th>
@@ -44,7 +46,6 @@
                             </td>
                             <td>{{ $group->course->name }} </td>
                             <td>{{ $group->teacher->name }}</td>
-                            {{-- <td class="ms-3">( {{ count($group->student) }} )</td> --}}
                             <td>{{ $group->days_in_a_week }}</td>
                             <td>{{ $group->start_time }}</td>
                             <td>{{ $group->end_time }}</td>
@@ -55,18 +56,39 @@
                                     <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">
                                         <i class="bi bi-pencil-square"></i>Edit</a>
 
-                                    <form action="{{ url('/groups/' . $group->id) }}"method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger me-2">
-                                            <i class="bi bi-trash3"></i>Delete</button>
-                                    </form>
+
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#groupModal" data-group-id="{{ $group->id }}">
+                                        <i class="bi bi-trash3 me-1"></i>Delete
+                                    </button>
+                                    <div class="modal fade" id="groupModal" tabindex="-1" aria-labelledby="gropModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="gropModalLabel">Class</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this class?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form id="groupForm" action="{{ url('/groups/' . $group->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger ">
+                                                            <i class="bi bi-trash3 me-1"></i>Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endauth
                             </td>
+                        </tr>
                     @endforeach
-                    </tr>
-
-
                 </tbody>
             </table>
         </div>

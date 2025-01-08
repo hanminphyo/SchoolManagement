@@ -18,14 +18,6 @@ class StudentController extends Controller
     {
         $students = Student::all();
         // dd($students);
-        // $query = $request->input('search');
-        // $students = Student::query();
-        // dd($students);
-        // if ($query) {
-        //     $students = $students->where('name', 'like', '%' . $query . '%')
-        //         ->orWhere('email', 'like', '%' . $query . '%')
-        //         ->orWhere('course_id', 'like', '%' . $query . '%');
-        // }
         return view('students.index', ['students' => $students]);
     }
 
@@ -42,14 +34,7 @@ class StudentController extends Controller
         return view('students.show', ['student' => $student]);
     }
 
-    public function destroy($id)
-    {
 
-        $student = Student::find($id);
-        $studentName = $student->name;
-        $student->delete();
-        return redirect('/students')->with('info', "'$studentName'  has been Deleted");
-    }
 
     public function store()
     {
@@ -59,8 +44,8 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -71,6 +56,12 @@ class StudentController extends Controller
         $student->course_id = request()->course_id;
         $student->phone = request()->phone;
         $student->address = request()->address;
+        if (request()->hasFile('image')) {
+            $image = request()->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('students', $image_name, 'public');
+            $student->image = $image_name;
+        }
         $student->save();
         return redirect('/students')->with('info',  " '$studentName'  has been created");
     }
@@ -91,6 +82,7 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -103,18 +95,39 @@ class StudentController extends Controller
         $student->course_id = request()->course_id;
         $student->phone = request()->phone;
         $student->address = request()->address;
+
+        if (request()->hasFile('image')) {
+            $image = request()->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('students', $image_name, 'public');
+            $student->image = $image_name;
+        }
+
         $student->save();
         return redirect('/students')->with('info',  " '$studentName'  has been Updated");
     }
 
-    // public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-    //     $students = Student::where('name', 'LIKE', "%{$query}%")
-    //         ->orWhere('email', 'LIKE', "%{$query}%")
-    //         ->orWhere('class', 'LIKE', "%{$query}%")
-    //         ->get();
-    //     // dd($students);
-    //     return view('students.index')->with(['students' => $students, 'query' => $query]);;
-    // }
+    public function destroy($id)
+    {
+
+        $student = Student::find($id);
+        $studentName = $student->name;
+        $student->delete();
+        return redirect('/students')->with('info', "'$studentName'  has been Deleted");
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $students = Student::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->get();
+        return view('students.index')->with(['students' => $students, 'query' => $query]);
+    }
+    // $query = $request->input('query');
+    // $students = Student::where('name', 'LIKE', "%{$query}%")
+    //     ->orWhere('email', 'LIKE', "%{$query}%")
+    //     // ->orWhere('class', 'LIKE', "%{$query}%")
+    //     ->get();
+    // // dd($student);
+    // return view('students.index')->with(['students' => $students, 'query' => $query]);
 }

@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <h1>Course List</h1>
         <a class="icon-link icon-link-hover mb-2" href="{{ url('/courses') }}">
             <i class="bi bi-arrow-left"></i>
-            Go Back
+            Back
         </a>
         @if ($errors->any())
             <div class="alert alert-warning">
@@ -25,7 +26,7 @@
                 <label class="fs-5 mb-1 mt-3">Fee</label>
                 <input type="text" name="course_fee" class="form-control" value="{{ old('course_fee') }}">
 
-                <button class="btn btn-success mt-3" type="submit"><i class="bi bi-check-circle me-1"></i>Confirm</button>
+                <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
             </form>
         </div>
     </div>

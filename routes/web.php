@@ -15,8 +15,8 @@ Route::get('/', function () {
 // Route::resource('/users', UserController::class);
 
 //Student Management//
+Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
 Route::resource('students', StudentController::class);
-
 // Route::get('students', [StudentController::class, 'index']);
 // Route::get('/students/create', [StudentController::class, 'create']);
 // Route::post('/students', [StudentController::class, 'store']);
@@ -26,11 +26,15 @@ Route::resource('students', StudentController::class);
 // Route::delete('students/{$id}', [StudentController::class, 'destroy']);
 
 // Course Mangagement
+Route::get('/courses/search', [CourseController::class, 'search'])->name('courses.search');
 Route::resource('courses', CourseController::class);
+
 // Group Management
+Route::get('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 Route::resource('groups', GroupController::class);
 
 //Teacher Management
+Route::get('/teachers/search', [TeacherController::class, 'search'])->name('teachers.search');
 Route::resource('teachers', TeacherController::class);
 
 Auth::routes();

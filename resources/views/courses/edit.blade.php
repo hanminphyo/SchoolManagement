@@ -4,7 +4,7 @@
         <h1 class="mt-2">Course List</h1>
         <a class="icon-link icon-link-hover mb-2" href="{{ url('/courses') }}">
             <i class="bi bi-arrow-left"></i>
-            Go Back
+            Back
         </a>
         @if ($errors->any())
             <div class="alert alert-warning">
@@ -26,7 +26,8 @@
             <label class="fs-5">Fee</label>
             <input type="text" name="fee" class="form-control" value="{{ $course->fee }}">
             <br />
-            <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-1"></i>Update</button>
+            <button class="btn btn-success" type="submit"><i
+                    class="bi bi-file-earmark-arrow-up-fill me-1"></i>Update</button>
         </form>
     </div>
 @endsection

@@ -39,15 +39,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- <div class="col-md-6 mt-2 mb-3">
-                        <label class="fs-5 mb-2">Student Name</label>
-                        <select name="student_id" class="form-control">
-                            @foreach ($students as $student)
-                                <option value="{{ $student->id }}">{{ $student->name }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
                     <div class="col-md-6 mt-2 mb-3">
                         <label class="fs-5 mt-2">Start Time</label>
                         <input type="time" name="start_time" class="form-control" value="{{ old('start_time') }}">
@@ -77,7 +68,7 @@
                         {{-- </div> --}}
                     </div>
                     <div>
-                        <button class="btn btn-success mt-3" type="submit">Create</button>
+                        <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
                     </div>
             </form>
         </div>
