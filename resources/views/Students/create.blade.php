@@ -47,8 +47,10 @@
                         <label class="fs-5 mb-2">Image</label>
                         <input type="file" name="image" class="form-control" accept="image/*">
                     </div>
-                    <button class="btn btn-primary mt-3 ms-2" type="submit">
-                        <i class="bi bi-floppy me-1"></i>Create</button>
+                </div>
+                <button class="btn btn-primary mt-3 ms-2" type="submit">
+                    <i class="bi bi-floppy me-1"></i>Create
+                </button>
             </form>
         </div>
     </div>

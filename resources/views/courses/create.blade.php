@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1>Course List</h1>
+        <h1 class="ms-2">Course List</h1>
         <a class="icon-link icon-link-hover mb-2" href="{{ url('/courses') }}">
             <i class="bi bi-arrow-left"></i>
             Back

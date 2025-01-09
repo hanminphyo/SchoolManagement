@@ -16,11 +16,11 @@
                 Teacher</a>
         @endauth
         @session('info')
-            <div class="alert alert-success">
+            <div class="alert alert-success mt-3">
                 {{ session('info') }}
             </div>
         @endsession
-        <div class="container ">
+        <div class="container d-none d-sm-block d-md-block mt-4">
             <table class="table table-hover mt-3">
                 <thead>
                     <tr>
@@ -79,6 +79,59 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="container d-block d-sm-none d-md-none mt-4">
+            @foreach ($teachers as $teacher)
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <label class="ms-3 mb-2">Name:</label>
+                        <span class="ms-4"><a
+                                href="{{ url('/teachers/' . $teacher->id) }}">{{ $teacher->name }}</a></span>
+                        <br>
+                        <label class="ms-3 mb-2">Email:</label>
+                        <span class="ms-4">{{ $teacher->email }}</span>
+                        <br>
+                        <label class="ms-3">Course:</label>
+                        <span class="ms-3">{{ $teacher->course->name }}</span>
+                        <br>
+                        <div class="d-flex justify-content-end">
+                            @auth
+                                <a href="{{ url('/teachers/' . $teacher->id . '/edit') }}" class="nav nav-link">
+                                    Edit</a>
+                                <button type="button" class="nav nav-link" data-bs-toggle="modal"
+                                    data-bs-target="#teacherModalSm" data-teacher-id="{{ $teacher->id }}">
+                                    Delete
+                                </button>
+                                <div class="modal fade" id="teacherModalSm" tabindex="-1" aria-labelledby="teacherModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="teacherModalSmLabel">Teacher</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this teacher?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form id="teacherFormSm" action="{{ url('/teachers/' . $teacher->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-trash3 me-1"></i>Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

@@ -14,21 +14,30 @@
                 </ol>
             </div>
         @endif
-        <form action="{{ url('/teachers') }}" method="post">
+        <form action="{{ url('/teachers') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <label class="fs-5">Name</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-            <br />
-            <label class="fs-5">Email</label>
-            <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-            <br />
-            <label class="fs-5">Course</label>
-            <select name="course_id" class="form-control">
-                @foreach ($courses as $course)
-                    <option value="{{ $course->id }}">{{ $course->name }}</option>
-                @endforeach
-            </select>
-            <br />
+            <div class="row">
+                <div class="col-md-6 mt-3">
+                    <label class="fs-5">Name</label>
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="fs-5">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="fs-5">Course</label>
+                    <select name="course_id" class="form-control">
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="fs-5 ">Image</label>
+                    <input type="file" name="image" class="form-control" accept="image/*">
+                </div>
+            </div>
             <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-1"></i>Confirm</button>
         </form>
     </div>

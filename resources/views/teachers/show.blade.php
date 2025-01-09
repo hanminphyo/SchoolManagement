@@ -6,19 +6,36 @@
             <i class="bi bi-arrow-left"></i>
             Go Back
         </a>
-        <div class="container mt-4">
-            <form>
-                <label class="fs-5">Teacher Name</label>
-                <input type="text" name="name" class="form-control" value="{{ $teacher->name }}" readonly>
-                <br />
-                <label class="fs-5">Course</label>
-                <input type="text" name="name" class="form-control" value="{{ $teacher->course->name }}" readonly>
-                <br />
-
-                <label class="fs-5">Teacher Email</label>
-                <input type="email" name="email" class="form-control" value="{{ $teacher->email }}" readonly>
-                <br />
-            </form>
+        <div class="container align-items-start">
+            <div class="col-md-6 mb-3 mb-sm-0">
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h3 class="card-title">Teacher Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-4 float-start">
+                                @if ($teacher->image)
+                                    <img src="{{ Storage::url('teachers/' . $teacher->image) }}" class="img-thumbnail" />
+                                @else
+                                    <img src="{{ asset('images/noimage.png') }}" class="img-thumbnail" />
+                                @endif
+                            </div>
+                            <div class="col-8 align-items-end">
+                                <label class="ms-3 mb-2">Name:</label>
+                                <span class="ms-4">{{ $teacher->name }}</span>
+                                <br>
+                                <label class="ms-3 mb-2">Email:</label>
+                                <span class="ms-4">{{ $teacher->email }}</span>
+                                <br>
+                                <label class="ms-3">Course:</label>
+                                <span class="ms-3">{{ $teacher->course->name }}</span>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
         </div>
-    </div>
-@endsection
+    @endsection

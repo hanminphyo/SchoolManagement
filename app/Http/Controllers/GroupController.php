@@ -46,7 +46,8 @@ class GroupController extends Controller
     public function show($id)
     {
         $group = Group::find($id);
-        return view('groups.show', ['group' => $group]);
+        $teachers = Teacher::all();
+        return view('groups.show')->with('group', $group)->with('teachers', $teachers);
     }
 
     public function store()

@@ -44,7 +44,8 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=600,min_height=600',
+
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -56,6 +57,7 @@ class StudentController extends Controller
         $student->course_id = request()->course_id;
         $student->phone = request()->phone;
         $student->address = request()->address;
+
         if (request()->hasFile('image')) {
             $image = request()->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -82,7 +84,7 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=600,min_height=600',
         ]);
 
         if ($validator->fails()) {
@@ -123,11 +125,4 @@ class StudentController extends Controller
             ->get();
         return view('students.index')->with(['students' => $students, 'query' => $query]);
     }
-    // $query = $request->input('query');
-    // $students = Student::where('name', 'LIKE', "%{$query}%")
-    //     ->orWhere('email', 'LIKE', "%{$query}%")
-    //     // ->orWhere('class', 'LIKE', "%{$query}%")
-    //     ->get();
-    // // dd($student);
-    // return view('students.index')->with(['students' => $students, 'query' => $query]);
 }

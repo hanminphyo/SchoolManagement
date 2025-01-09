@@ -48,6 +48,7 @@ class TeacherController extends Controller
             'name' => 'required',
             'email' => 'required',
             'course_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -58,6 +59,13 @@ class TeacherController extends Controller
         $teacherName = $teacher->name;
         $teacher->email = request()->email;
         $teacher->course_id = request()->course_id;
+
+        if (request()->hasFile('image')) {
+            $image = request()->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('teachers', $image_name, 'public');
+            $teacher->image = $image_name;
+        }
         $teacher->save();
         return redirect('/teachers')->with('info', " '$teacherName' has been created");
     }
@@ -75,6 +83,7 @@ class TeacherController extends Controller
             'name' => 'required',
             'email' => 'required',
             'course_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -85,6 +94,13 @@ class TeacherController extends Controller
         $teacherName = $teacher->name;
         $teacher->email = request()->email;
         $teacher->course_id = request()->course_id;
+
+        if (request()->hasFile('image')) {
+            $image = request()->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('teachers', $image_name, 'public');
+            $teacher->image = $image_name;
+        }
         $teacher->save();
         return redirect('/teachers')->with('info', "'$teacherName' has been Update");
     }

@@ -20,7 +20,7 @@
                 {{ session('info') }}
             </div>
         @endsession
-        <div class="container">
+        <div class="container d-none d-sm-block d-md-block">
             <table class="table table-hover mt-4">
                 <thead>
                     <tr>
@@ -91,6 +91,55 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="container d-lg-none">
+            @foreach ($groups as $group)
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $group->name }}</h5>
+                        <p class="card-text"><strong>Course Name:</strong> {{ $group->course->name }}</p>
+                        <p class="card-text"><strong>Teacher Name:</strong> {{ $group->teacher->name }}</p>
+                        <p class="card-text"><strong>Days of Attendance:</strong> {{ $group->days_in_a_week }}</p>
+                        <p class="card-text"><strong>Start Time:</strong> {{ $group->start_time }}</p>
+                        <p class="card-text"><strong>End Time:</strong> {{ $group->end_time }}</p>
+                        <p class="card-text"><strong>Start Date:</strong> {{ $group->start_date }}</p>
+                        <p class="card-text"><strong>End Date:</strong> {{ $group->end_date }}</p>
+                        <div class="d-flex justify-content-end">
+                            @auth
+                                <a href="{{ url('/groups/' . $group->id . '/edit') }}" class="nav nav-link">
+                                    Edit</a>
+                                <button type="button" class="nav nav-link" data-bs-toggle="modal"
+                                    data-bs-target="#groupModalSm{{ $group->id }}">
+                                    Delete
+                                </button>
+                                <div class="modal fade" id="groupModalSm{{ $group->id }}" tabindex="-1"
+                                    aria-labelledby="groupModalSmLabel{{ $group->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="groupModalSmLabel{{ $group->id }}">Class</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this class?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="{{ url('/groups/' . $group->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-trash3 me-1"></i>Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

@@ -13,6 +13,7 @@ class Teacher extends Model
         'name',
         'email',
         'course_id',
+        'image',
     ];
     public function course()
     {

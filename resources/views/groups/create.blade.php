@@ -68,7 +68,7 @@
                         {{-- </div> --}}
                     </div>
                     <div>
-                        <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
+                        <button class="btn btn-primary mt-3 mb-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
                     </div>
             </form>
         </div>

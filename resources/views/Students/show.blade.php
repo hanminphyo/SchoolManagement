@@ -20,6 +20,9 @@
         <div class="container aling-items-center">
             <div class="col-md-6 mb-3 mb-sm-0">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Student Details</h3>
+                    </div>
                     <div class="card-body">
                         <div class="row g-4">
                             <div class="col-4  float-start">
@@ -28,6 +31,10 @@
                                 @else
                                     <img src="{{ asset('images/noimage.png ') }}" class="img-thumbnail" />
                                 @endif
+                                <div class="mt-3">
+                                    <label>Date:</label>
+                                    <span>{{ $student->created_at->format('d/m/Y') }}</span>
+                                </div>
                             </div>
                             <div class="col-8  align-items-end">
                                 <label class="mx-4">Name:</label>
@@ -52,5 +59,4 @@
             </div>
             <hr>
         </div>
-    </div>
-@endsection
+    @endsection

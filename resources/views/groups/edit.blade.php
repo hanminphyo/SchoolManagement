@@ -20,7 +20,7 @@
             @csrf
             <label class="fs-5 mb-2">Name</label>
             <input type="text" name="name" class="form-control" value="{{ $group->name }}">
-            
+
             <label>Course Name</label>
             <select name="course_id" class="form-control">
                 @foreach ($courses as $course)
@@ -51,7 +51,7 @@
             <label>End Date</label>
             <input type="date" name="end_date" class="form-control" value="{{ $group->end_date }}">
             <br />
-            <button class="btn btn-success mt-3" type="submit"><i class="bi bi-check-circle me-1"></i>Update</button>
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
         </form>
     </div>
 @endsection
