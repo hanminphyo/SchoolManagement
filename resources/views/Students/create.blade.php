@@ -48,7 +48,7 @@
                         <input type="file" name="image" class="form-control" accept="image/*">
                     </div>
                 </div>
-                <button class="btn btn-primary mt-3 ms-2" type="submit">
+                <button class="btn btn-primary mt-3 " type="submit">
                     <i class="bi bi-floppy me-1"></i>Create
                 </button>
             </form>

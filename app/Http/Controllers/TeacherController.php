@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
@@ -37,6 +38,11 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::find($id);
         $teacherName = $teacher->name;
+        $image_path = 'teachers/' . $teacher->image;
+        // dd($image_path);
+        if ($teacher->image && Storage::disk('public')->exists($image_path)) {
+            Storage::disk('public')->delete($image_path);
+        }
         $teacher->delete();
         return redirect('/teachers')->with('info', "'$teacherName'  has been Deleted");
     }
@@ -77,7 +83,7 @@ class TeacherController extends Controller
         // dd($courses);
         return view('teachers.edit')->with('teacher', $teacher)->with('courses', $courses);
     }
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $validator = validator(request()->all(), [
             'name' => 'required',
@@ -96,11 +102,16 @@ class TeacherController extends Controller
         $teacher->course_id = request()->course_id;
 
         if (request()->hasFile('image')) {
-            $image = request()->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('teachers', $image_name, 'public');
-            $teacher->image = $image_name;
+            $newImage = $request->file('image');
+            $newImageName = time() . '.' . $newImage->getClientOriginalExtension();
+            $oldImage = 'teachers/' . $teacher->image;
+            if ($teacher->image && Storage::disk('public')->exists($oldImage)) {
+                Storage::disk('public')->delete($oldImage);
+            }
+            $newImage->storeAs('teachers', $newImageName, 'public');
+            $teacher->image = $newImageName;
         }
+
         $teacher->save();
         return redirect('/teachers')->with('info', "'$teacherName' has been Update");
     }
@@ -110,7 +121,17 @@ class TeacherController extends Controller
         $query = $request->input('query');
         $teachers = Teacher::where('name', 'LIKE', "%{$query}%")
             ->orWhere('email', 'LIKE', "%{$query}%")
+            ->orWhereHas('course', function ($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%");
+            })
             ->get();
         return view('teachers.index')->with(['teachers' => $teachers, 'query' => $query]);
     }
+
+    // public function getTeachers(Request $request)
+    // {
+    //     $courseId = $request->input('course_id');
+    //     $teachers = Teacher::where('course_id', $courseId)->get();
+    //     return view('teachers.index')->with('teachers', $teachers)->with('courseId', $courseId);
+    // }
 }

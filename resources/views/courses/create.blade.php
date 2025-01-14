@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="ms-2">Course List</h1>
-        <a class="icon-link icon-link-hover mb-2" href="{{ url('/courses') }}">
+        <a class="icon-link icon-link-hover mb-2 mt-3" href="{{ url('/courses') }}">
             <i class="bi bi-arrow-left"></i>
             Back
         </a>
+        <h1>Create Course</h1>
         @if ($errors->any())
             <div class="alert alert-warning">
                 <ol>
@@ -24,7 +24,7 @@
                 <label class="fs-5 mb-1 mt-3">Course Outline</label>
                 <textarea name="outlines" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
                 <label class="fs-5 mb-1 mt-3">Fee</label>
-                <input type="text" name="course_fee" class="form-control" value="{{ old('course_fee') }}">
+                <input type="text" name="fee" class="form-control" value="{{ old('fee') }}">
 
                 <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
             </form>

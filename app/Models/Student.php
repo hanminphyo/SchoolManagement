@@ -22,9 +22,8 @@ class Student extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
-
-    public function groups()
+    public function dashboard()
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsTo(Dashboard::class);
     }
 }

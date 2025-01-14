@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="mt-2">Teacher List</h1>
-        <a class="icon-link icon-link-hover mb-2" href="{{ url('/teachers') }}">
+        <a class="icon-link icon-link-hover mb-2 mt-3" href="{{ url('/teachers') }}">
             <i class="bi bi-arrow-left"></i>
             Go Back
         </a>
-        <div class="container align-items-start">
+        <div class="container align-items-center">
             <div class="col-md-6 mb-3 mb-sm-0">
                 <div class="card mt-2">
                     <div class="card-header">
@@ -18,14 +17,15 @@
                                 @if ($teacher->image)
                                     <img src="{{ Storage::url('teachers/' . $teacher->image) }}" class="img-thumbnail" />
                                 @else
-                                    <img src="{{ asset('images/noimage.png') }}" class="img-thumbnail" />
+                                    <img src="{{ asset('images/noimage.png') }}" class="img-thumbnail"
+                                        style="min_width=100,min_height=100" />
                                 @endif
                             </div>
                             <div class="col-8 align-items-end">
-                                <label class="ms-3 mb-2">Name:</label>
+                                <label class="ms-3">Name:</label>
                                 <span class="ms-4">{{ $teacher->name }}</span>
                                 <br>
-                                <label class="ms-3 mb-2">Email:</label>
+                                <label class="ms-3">Email:</label>
                                 <span class="ms-4">{{ $teacher->email }}</span>
                                 <br>
                                 <label class="ms-3">Course:</label>

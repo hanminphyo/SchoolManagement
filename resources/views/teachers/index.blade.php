@@ -24,17 +24,17 @@
             <table class="table table-hover mt-3">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Course</th>
-                        <th scope="col">Action</th>
+                        @auth
+                            <th scope="col">Action</th>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($teachers as $teacher)
                         <tr>
-                            <th scope="row">{{ $teacher['id'] }}</th>
                             <td><a href="{{ url('/teachers/' . $teacher->id) }}">{{ $teacher->name }}</a></td>
                             <td>{{ $teacher->email }}</td>
                             <td>{{ $teacher->course->name }}</td>
@@ -54,13 +54,13 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="teacherModalLabel">Teacher</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this teacher?</p>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
                                                     <form id="teacherForm" action="{{ url('/teachers/' . $teacher->id) }}"
                                                         method="post">
                                                         @csrf
@@ -108,13 +108,13 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="teacherModalSmLabel">Teacher</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete this teacher?</p>
                                             </div>
                                             <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
                                                 <form id="teacherFormSm" action="{{ url('/teachers/' . $teacher->id) }}"
                                                     method="post">
                                                     @csrf

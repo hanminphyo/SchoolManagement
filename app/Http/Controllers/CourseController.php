@@ -45,8 +45,8 @@ class CourseController extends Controller
     {
         $validator = validator(request()->all(), [
             'course_name' => 'required',
-            'course_fee' => 'required',
             'outlines' => 'required',
+            'fee' => 'required',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -55,7 +55,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->name = request()->course_name;
         $courseName = $course->name;
-        $course->fee = request()->course_fee;
+        $course->fee = request()->fee;
         $course->outlines = request()->outlines;
         $course->save();
         return redirect('/courses')->with('info', "' $courseName '  has been created!");
@@ -72,8 +72,8 @@ class CourseController extends Controller
     {
         $validator = validator(request()->all(), [
             'name' => 'required',
-            'fee' => 'required',
             'outlines' => 'required',
+            'fee' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -102,7 +102,10 @@ class CourseController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('query');
-        $courses = Course::where('name', 'like', '%' . $query . '%')->get();
+        $courses = Course::where('name', 'like', '%' . $query . '%')
+            ->orWhere('outlines', 'like', '%' . $query . '%')
+            ->orWhere('fee', 'like', '%' . $query . '%')
+            ->get();
         return view('courses.index', ['courses' => $courses]);
     }
 }

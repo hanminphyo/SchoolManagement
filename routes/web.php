@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -14,6 +15,12 @@ Route::get('/', function () {
 
 // Route::resource('/users', UserController::class);
 
+Route::resource('dashboard', DashboardController::class);
+
+// Course Mangagement
+Route::get('/courses/search', [CourseController::class, 'search'])->name('courses.search');
+Route::resource('courses', CourseController::class);
+
 //Student Management//
 Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
 Route::resource('students', StudentController::class);
@@ -25,17 +32,16 @@ Route::resource('students', StudentController::class);
 // Route::put('/students/{id}', [StudentController::class, 'update']);
 // Route::delete('students/{$id}', [StudentController::class, 'destroy']);
 
-// Course Mangagement
-Route::get('/courses/search', [CourseController::class, 'search'])->name('courses.search');
-Route::resource('courses', CourseController::class);
+//Teacher Management
+// Route::get('/teachers', [TeacherController::class, 'getTeachers'])->name('get.teachers');
+Route::get('/teachers/search', [TeacherController::class, 'search'])->name('teachers.search');
+Route::resource('teachers', TeacherController::class);
 
 // Group Management
 Route::get('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 Route::resource('groups', GroupController::class);
 
-//Teacher Management
-Route::get('/teachers/search', [TeacherController::class, 'search'])->name('teachers.search');
-Route::resource('teachers', TeacherController::class);
+
 
 Auth::routes();
 

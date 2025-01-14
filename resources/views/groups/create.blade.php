@@ -57,18 +57,15 @@
                     </div>
                     <div class="col-md-6 mt-2 mb-3">
                         <label class="fs-5 mb-2">Days</label><br />
-                        {{-- <div class="form-control"> --}}
-                        <label><input type="checkbox" name="days[]" value="Mon" class="fs-6 mx-1"> Mon</label>
-                        <label><input type="checkbox" name="days[]" value="Tue" class="fs-6 mx-1"> Tue</label>
-                        <label><input type="checkbox" name="days[]" value="Wed" class="fs-6 mx-1"> Wed</label>
-                        <label><input type="checkbox" name="days[]" value="Thu" class="fs-6 mx-1"> Thu</label>
-                        <label><input type="checkbox" name="days[]" value="Fri" class="fs-6 mx-1"> Fri</label>
-                        <label><input type="checkbox" name="days[]" value="Sat" class="fs-6 mx-1"> Sat</label>
-                        <label><input type="checkbox" name="days[]" value="Sun" class="fs-6 mx-1"> Sun</label>
-                        {{-- </div> --}}
+                        @foreach (['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as $day)
+                            <label><input type="checkbox" name="days[]" value="{{ $day }}" class="fs-6 mx-1">
+                                {{ $day }}</label>
+                        @endforeach
+
                     </div>
                     <div>
-                        <button class="btn btn-primary mt-3 mb-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
+                        <button class="btn btn-primary mt-3 mb-3" type="submit"><i
+                                class="bi bi-floppy me-1"></i>Create</button>
                     </div>
             </form>
         </div>

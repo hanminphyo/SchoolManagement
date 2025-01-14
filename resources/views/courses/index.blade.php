@@ -25,27 +25,33 @@
             <table class="table ">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+
                         <th scope="col">Course Name</th>
                         <th scope="col">Students</th>
                         <th scope="col">Outline</th>
                         <th scope="col">Fee</th>
-                        <th scope="col">Action</th>
+                        @auth
+                            <th scope="col">Action</th>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($courses as $course)
                         <tr>
-                            <th scope="row">{{ $course['id'] }}</th>
+
                             <td><a href="{{ url('/courses/' . $course->id) }}">{{ $course->name }}</a></td>
                             {{-- @foreach ($studnets as $student) --}}
                             <td class="ms-3">
                                 {{ count($course->students) }} </td>
                             {{-- @endforeach --}}
-                            <td>{{ $course->outlines }}<br /></td>
+                            <td>
+                                @php
+                                    echo nl2br($course->outlines);
+                                @endphp
+                            </td>
                             <td>{{ $course->fee }}</td>
-                            <td class="d-flex">
-                                @auth
+                            @auth
+                                <td>
                                     <a href="{{ url('/courses/' . $course->id . '/edit') }}"class="btn btn-warning me-2">
                                         <i class="bi bi-pencil-square me-1"></i> Edit</a>
 
@@ -59,13 +65,13 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="courseModalLabel">Course</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this course?</p>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
                                                     <form id="courseForm" action="{{ url('/courses/' . $course->id) }}"
                                                         method="post">
                                                         @csrf
@@ -116,14 +122,14 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="courseModalSmLabel">Course</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete this course?</p>
                                             </div>
 
                                             <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
                                                 <form id="courseFormSm" action="{{ url('/courses/' . $course->id) }}"
                                                     method="post">
                                                     @csrf

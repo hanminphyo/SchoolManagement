@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h1 class="mx-1">Student List</h1>
-        <a class="icon-link icon-link-hover mb-3" href="{{ url('/students') }}">
+        <a class="icon-link icon-link-hover mb-3 mt-3" href="{{ url('/students') }}">
             <i class="bi bi-arrow-left"></i>
             Back
         </a>
@@ -27,7 +26,8 @@
                         <div class="row g-4">
                             <div class="col-4  float-start">
                                 @if ($student->image)
-                                    <img src="{{ Storage::url('students/' . $student->image) }}" class="img-thumbnail" />
+                                    <img src="{{ Storage::url('students/' . $student->image) }}" class="img-thumbnail"
+                                        style="min-width: 100px; min-height: 100px;" />
                                 @else
                                     <img src="{{ asset('images/noimage.png ') }}" class="img-thumbnail" />
                                 @endif

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Student;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\Cloner\Stub;
 
 class StudentController extends Controller
 {
@@ -34,8 +34,6 @@ class StudentController extends Controller
         return view('students.show', ['student' => $student]);
     }
 
-
-
     public function store()
     {
         $validator = validator(request()->all(), [
@@ -44,7 +42,7 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=600,min_height=600',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
 
         ]);
         if ($validator->fails()) {
@@ -76,7 +74,7 @@ class StudentController extends Controller
         return view('students.edit')->with('student', $student)->with('courses', $courses);
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $validator = validator(request()->all(), [
             'name' => 'required',
@@ -84,7 +82,7 @@ class StudentController extends Controller
             'course_id' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=600,min_height=600',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100',
         ]);
 
         if ($validator->fails()) {
@@ -99,10 +97,14 @@ class StudentController extends Controller
         $student->address = request()->address;
 
         if (request()->hasFile('image')) {
-            $image = request()->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('students', $image_name, 'public');
-            $student->image = $image_name;
+            $newImage = $request->file('image');
+            $newImageName = time() . '.' . $newImage->getClientOriginalExtension();
+            $oldImage = 'students/' . $student->image;
+            if ($student->image && Storage::disk('public')->exists($oldImage)) {
+                Storage::disk('public')->delete($oldImage);
+            }
+            $newImage->storeAs('students', $newImageName, 'public');
+            $student->image = $newImageName;
         }
 
         $student->save();
@@ -111,17 +113,27 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
-
         $student = Student::find($id);
         $studentName = $student->name;
+        $image_path = 'students/' . $student->image;
+        // dd($image_path);
+        if ($student->image && Storage::disk('public')->exists($image_path)) {
+            Storage::disk('public')->delete($image_path);
+        }
         $student->delete();
         return redirect('/students')->with('info', "'$studentName'  has been Deleted");
     }
+
     public function search(Request $request)
     {
         $query = $request->input('query');
         $students = Student::where('name', 'LIKE', "%{$query}%")
             ->orWhere('email', 'LIKE', "%{$query}%")
+            ->orWhere('phone', 'LIKE', "%{$query}%")
+            ->orWhere('address', 'LIKE', "%{$query}%")
+            ->orWhereHas('course', function ($course) use ($query) {
+                $course->where('name', 'LIKE', "%{$query}%");
+            })
             ->get();
         return view('students.index')->with(['students' => $students, 'query' => $query]);
     }

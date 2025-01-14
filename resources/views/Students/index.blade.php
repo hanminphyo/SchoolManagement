@@ -26,7 +26,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Course</th>
@@ -40,7 +39,6 @@
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <th scope="row">{{ $student['id'] }}</th>
                             <td><a href="{{ url('/students/' . $student->id) }}">{{ $student->name }}</a></td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->course->name }}</td>
@@ -62,13 +60,13 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="studentModalLabel">Student</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this student?</p>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
                                                     <form id="studentForm" action="{{ url('/students/' . $student->id) }}"
                                                         method="post">
                                                         @csrf
@@ -124,13 +122,13 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="studentModalSmLabel">Student</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure you want to delete this student?</p>
                                         </div>
                                         <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
                                             <form id="studentFormSm" action="{{ url('/students/' . $student->id) }}"
                                                 method="post">
                                                 @csrf

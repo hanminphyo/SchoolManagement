@@ -24,7 +24,6 @@
             <table class="table table-hover mt-4">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Class Name</th>
                         <th scope="col">Course Name</th>
                         <th scope="col">Teacher Name</th>
@@ -33,29 +32,29 @@
                         <th scope="col">End Time</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
-                        <th scope="col">Action</th>
+                        @auth
+                            <th scope="col">Action</th>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($groups as $group)
                         <tr>
-                            <th scope="row">{{ $group->id }}</th>
                             <td>
                                 <a href="{{ url('/groups/' . $group->id) }}">
                                     {{ $group->name }}</a>
                             </td>
                             <td>{{ $group->course->name }} </td>
                             <td>{{ $group->teacher->name }}</td>
-                            <td>{{ $group->days_in_a_week }}</td>
-                            <td>{{ $group->start_time }}</td>
-                            <td>{{ $group->end_time }}</td>
-                            <td>{{ $group->start_date }}</td>
-                            <td>{{ $group->end_date }}</td>
-                            <td class="d-flex">
-                                @auth
+                            <td>{{ $group->days }}</td>
+                            <td>{{ date('h:i A', strtotime($group->start_time)) }}</td>
+                            <td>{{ date('h:i A', strtotime($group->end_time)) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($group->start_date)) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($group->end_date)) }}</td>
+                            @auth
+                                <td class="d-flex">
                                     <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">
                                         <i class="bi bi-pencil-square"></i>Edit</a>
-
 
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#groupModal" data-group-id="{{ $group->id }}">
@@ -67,13 +66,13 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="gropModalLabel">Class</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this class?</p>
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
                                                     <form id="groupForm" action="{{ url('/groups/' . $group->id) }}"
                                                         method="post">
                                                         @csrf
@@ -92,54 +91,91 @@
                 </tbody>
             </table>
         </div>
-        <div class="container d-lg-none">
-            @foreach ($groups as $group)
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $group->name }}</h5>
-                        <p class="card-text"><strong>Course Name:</strong> {{ $group->course->name }}</p>
-                        <p class="card-text"><strong>Teacher Name:</strong> {{ $group->teacher->name }}</p>
-                        <p class="card-text"><strong>Days of Attendance:</strong> {{ $group->days_in_a_week }}</p>
-                        <p class="card-text"><strong>Start Time:</strong> {{ $group->start_time }}</p>
-                        <p class="card-text"><strong>End Time:</strong> {{ $group->end_time }}</p>
-                        <p class="card-text"><strong>Start Date:</strong> {{ $group->start_date }}</p>
-                        <p class="card-text"><strong>End Date:</strong> {{ $group->end_date }}</p>
-                        <div class="d-flex justify-content-end">
-                            @auth
-                                <a href="{{ url('/groups/' . $group->id . '/edit') }}" class="nav nav-link">
-                                    Edit</a>
-                                <button type="button" class="nav nav-link" data-bs-toggle="modal"
-                                    data-bs-target="#groupModalSm{{ $group->id }}">
-                                    Delete
-                                </button>
-                                <div class="modal fade" id="groupModalSm{{ $group->id }}" tabindex="-1"
-                                    aria-labelledby="groupModalSmLabel{{ $group->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="groupModalSmLabel{{ $group->id }}">Class</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to delete this class?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="{{ url('/groups/' . $group->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="bi bi-trash3 me-1"></i>Delete</button>
-                                                </form>
-                                            </div>
+    </div>
+    <div class="container d-lg-none">
+        @foreach ($groups as $group)
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label me-3">Class Name:</label>
+                            <span class="fw-bold">{{ $group->name }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label
+                                    me-3 ">Course Name:</label>
+                            <span class="fw-bold">{{ $group->course->name }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label
+                                    me-3 ">Teacher Name:</label>
+                            @foreach ($teachers as $teacher)
+                                <span class="fw-bold"><a
+                                        href="{{ url('/teachers/' . $teacher->id) }}">{{ $teacher->name }}</a></span>
+                            @endforeach
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label
+                                    me-3 ">Days:</label>
+                            <span class="fw-bold">{{ $group->days }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label
+                                    me-3 ">Start Time:</label>
+                            <span class="fw-bold">{{ date('h:i A', strtotime($group->start_time)) }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label
+                                    me-3 ">End Time:</label>
+                            <span class="fw-bold">{{ date('h:i A', strtotime($group->end_time)) }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label me-3 ">Start Date:</label>
+                            <span class="fw-bold">{{ date('d-m-Y', strtotime($group->start_date)) }}</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-start">
+                            <label class="form-label me-3 ">End Date:</label>
+                            <span class="fw-bold">{{ date('d-m-Y', strtotime($group->end_date)) }}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        @auth
+                            <a href="{{ url('/groups/' . $group->id . '/edit') }}" class="nav nav-link">
+                                Edit</a>
+                            <button type="button" class="nav nav-link" data-bs-toggle="modal"
+                                data-bs-target="#groupModalSm{{ $group->id }}">
+                                Delete
+                            </button>
+                            <div class="modal fade" id="groupModalSm{{ $group->id }}" tabindex="-1"
+                                aria-labelledby="groupModalSmLabel{{ $group->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="groupModalSmLabel{{ $group->id }}">
+                                                Class
+                                            </h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete this class?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{{ url('/groups/' . $group->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash3 me-1"></i>Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            @endauth
-                        </div>
+                            </div>
+                        @endauth
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
+
 @endsection

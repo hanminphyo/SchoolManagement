@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <a class="icon-link icon-link-hover mb-2" href="{{ url('/teachers') }}">
+        <a class="icon-link icon-link-hover mb-2 mt-3" href="{{ url('/teachers') }}">
             <i class="bi bi-arrow-left"></i>
             Go Back
         </a>
@@ -38,7 +38,7 @@
                     <input type="file" name="image" class="form-control" accept="image/*">
                 </div>
             </div>
-            <button class="btn btn-success" type="submit"><i class="bi bi-check-circle me-1"></i>Confirm</button>
+            <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-floppy me-1"></i>Create</button>
         </form>
     </div>
 @endsection

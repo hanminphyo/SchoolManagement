@@ -30,25 +30,25 @@
                     <div class="col-6 d-flex align-items-start">
                         <label class="form-label
                             me-3 ">Days:</label>
-                        <span class="fw-bold">{{ $group->days_in_a_week }}</span>
+                        <span class="fw-bold">{{ $group->days }}</span>
                     </div>
                     <div class="col-6 d-flex align-items-start">
                         <label class="form-label
                             me-3 ">Start Time:</label>
-                        <span class="fw-bold">{{ $group->start_time }}</span>
+                        <span class="fw-bold">{{ date('h:i A', strtotime($group->start_time)) }}</span>
                     </div>
                     <div class="col-6 d-flex align-items-start">
                         <label class="form-label
-                            me-3 ">End Time:</label>
-                        <span class="fw-bold">{{ $group->end_time }}</span>
+                            me-3 ">End Time:</label> <span
+                            class="fw-bold">{{ date('h:i A', strtotime($group->end_time)) }}</span>
                     </div>
                     <div class="col-6 d-flex align-items-start">
                         <label class="form-label me-3 ">Start Date:</label>
-                        <span class="fw-bold">{{ $group->start_date }}</span>
+                        <span class="fw-bold">{{ date('d-m-Y', strtotime($group->start_date)) }}</span>
                     </div>
                     <div class="col-6 d-flex align-items-start">
                         <label class="form-label me-3 ">End Date:</label>
-                        <span class="fw-bold">{{ $group->end_date }}</span>
+                        <span class="fw-bold">{{ date('d-m-Y', strtotime($group->end_date)) }}</span>
                     </div>
                 </div>
             </div>
