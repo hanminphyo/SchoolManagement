@@ -92,6 +92,7 @@
             </table>
         </div>
     </div>
+    
     <div class="container d-lg-none">
         @foreach ($groups as $group)
             <div class="card mt-3">

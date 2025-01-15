@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,8 +14,12 @@ Route::get('/', function () {
 });
 
 
-// Route::resource('/users', UserController::class);
+// Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::post('/dashboard/users', [UserController::class, 'assignRole'])->name('dashboard.users.assignRole');
+Route::resource('dashboard', UserController::class);
 
+
+// Admin Management
 Route::resource('dashboard', DashboardController::class);
 
 // Course Mangagement
