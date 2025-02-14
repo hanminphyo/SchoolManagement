@@ -115,6 +115,7 @@
                         <td>
                             <form action="{{ route('dashboard.users.assignRole') }}" method="post">
                                 @csrf
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 <select name="role_id" class="form-select">
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}"

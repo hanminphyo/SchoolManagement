@@ -31,22 +31,24 @@
                         @csrf
                         <label class="fs-5 mt-2 mb-1">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ $teacher->name }}">
+                        <label class="fs-5 mt-2 mb-1">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ $teacher->email }}">
+                        <label class="fs-5 mt-2 mb-1">Course</label>
+                        <select name="course_id" class="form-control">
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}"
+                                    {{ $course->id == $teacher->course_id ? 'selected' : '' }}>
+                                    {{ $course->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div>
+                            <button class="btn btn-primary mb-2  mt-3" type="submit">
+                                <i class="bi bi-floppy me-1"></i>Update
+                            </button>
+                        </div>
                 </div>
                 <div class="col-md-6">
-                    <label class="fs-5 mt-2 mb-1">Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ $teacher->email }}">
-                </div>
-                <div class="col-md-6">
-                    <label class="fs-5 mt-2 mb-1">Course</label>
-                    <select name="course_id" class="form-control">
-                        @foreach ($courses as $course)
-                            <option value="{{ $course->id }}" {{ $course->id == $teacher->course_id ? 'selected' : '' }}>
-                                {{ $course->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6 mt-3">
                     <label class="fs-5 mb-2">Image</label>
                     <input type="file" name="image" class="form-control" accept="image/*" />
                     @if ($teacher->image)
@@ -54,11 +56,7 @@
                     @else
                         <img src="{{ asset('images/noimage.png ') }}" class="img-thumbnail" />
                     @endif
-                </div>
-                <div>
-                    <button class="btn btn-primary mb-2  mt-3" type="submit">
-                        <i class="bi bi-floppy me-1"></i>Update
-                    </button>
+
                 </div>
                 </form>
             </div>

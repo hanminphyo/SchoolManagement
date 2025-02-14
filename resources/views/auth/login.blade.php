@@ -126,7 +126,7 @@
         </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <div class="dropdown position-fixed bottom-0 start-0 mb-3 ms-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
             aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
@@ -176,8 +176,6 @@
 
 
     <main class="form-signin w-100 m-auto">
-        <img class="mb-4" src=" {{ asset('assets/bootstrap-logo.svg') }}" alt="" width="72"
-            height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <form method="POST" action="{{ route('login') }}">
@@ -197,27 +195,23 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <div class="input-group mb-3">
+                    <div class="input-group  ">
                         <input id="password" type="password"
                             class="form-control @error('password') is-invalid @enderror " name="password"
-                            placeholder="Password..." required autocomplete="current-password">
-                        <span class="input-group-text" onclick="togglePassword()"> <i id="toggleIcon"
-                                class="bi bi-eye-slash-fill"></i></span>
+                            placeholder="Password" required autocomplete="current-password">
+                        <span class="input-group-text  " style="cursor: pointer" onclick="togglePassword()">
+                            <i id="toggleIcon" class="bi bi-eye-slash"></i>
+                        </span>
                     </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col offset">
+                <div class="col ">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                             {{ old('remember') ? 'checked' : '' }}>

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12 d-flex justify-content-between mt-2">
+            <div class="col-md-12 d-flex justify-content-between mt-3">
                 <h1>Class List</h1>
                 <form action="{{ route('groups.search') }}" method="GET" id="search-form"
                     class="col-lg-auto mb-lg-0 me-lg-3 pe-4" role="search">
@@ -44,13 +44,13 @@
                                 <a href="{{ url('/groups/' . $group->id) }}">
                                     {{ $group->name }}</a>
                             </td>
-                            <td>{{ $group->course->name }} </td>
-                            <td>{{ $group->teacher->name }}</td>
+                            <td>{{ $group->course->name ?? 'No Course Assigned' }}</td>
+                            <td>{{ $group->teacher->name ?? 'No Teacher Assigned' }}</td>
                             <td>{{ $group->days }}</td>
-                            <td>{{ date('h:i A', strtotime($group->start_time)) }}</td>
-                            <td>{{ date('h:i A', strtotime($group->end_time)) }}</td>
-                            <td>{{ date('d-m-Y', strtotime($group->start_date)) }}</td>
-                            <td>{{ date('d-m-Y', strtotime($group->end_date)) }}</td>
+                            <td>{{ $group->start_time }}</td>
+                            <td>{{ $group->end_time }}</td>
+                            <td>{{ $group->start_date }}</td>
+                            <td>{{ $group->end_date }}</td>
                             @auth
                                 <td class="d-flex">
                                     <a href="{{ url('/groups/' . $group->id . '/edit') }}"class="btn btn-warning me-2">
@@ -90,12 +90,13 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $groups->links() }}
         </div>
     </div>
-    
+
     <div class="container d-lg-none">
         @foreach ($groups as $group)
-            <div class="card mt-3">
+            <div class="card mt-3 mb-3">
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-6 d-flex align-items-start">
@@ -110,10 +111,9 @@
                         <div class="col-6 d-flex align-items-start">
                             <label class="form-label
                                     me-3 ">Teacher Name:</label>
-                            @foreach ($teachers as $teacher)
-                                <span class="fw-bold"><a
-                                        href="{{ url('/teachers/' . $teacher->id) }}">{{ $teacher->name }}</a></span>
-                            @endforeach
+
+                            <span class="fw-bold">{{ $group->teacher->name }}</span>
+
                         </div>
                         <div class="col-6 d-flex align-items-start">
                             <label class="form-label
@@ -177,6 +177,7 @@
                 </div>
             </div>
         @endforeach
+        {{ $groups->links() }}
     </div>
 
 @endsection

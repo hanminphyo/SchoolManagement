@@ -15,7 +15,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::paginate(2);
         $students = Student::all();
         return view('courses.index')->with('courses', $courses)->with('studnets', $students);
     }
@@ -105,7 +105,7 @@ class CourseController extends Controller
         $courses = Course::where('name', 'like', '%' . $query . '%')
             ->orWhere('outlines', 'like', '%' . $query . '%')
             ->orWhere('fee', 'like', '%' . $query . '%')
-            ->get();
+            ->paginate(2);
         return view('courses.index', ['courses' => $courses]);
     }
 }

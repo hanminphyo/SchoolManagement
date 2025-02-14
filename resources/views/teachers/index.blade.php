@@ -2,7 +2,7 @@
 @section('content')
     <div class="container fluid-width">
         <div class="row">
-            <div class="col-md-12 d-flex justify-content-between mt-2">
+            <div class="col-md-12 d-flex justify-content-between mt-3">
                 <h1>Teacher List</h1>
                 <form action="{{ route('teachers.search') }}" method="GET" id="search-form"
                     class="col-lg-auto mb-lg-0 me-lg-3 pe-4" role="search">
@@ -79,7 +79,9 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $teachers->links() }}
         </div>
+
         <div class="container d-block d-sm-none d-md-none mt-4">
             @foreach ($teachers as $teacher)
                 <div class="card mt-3">

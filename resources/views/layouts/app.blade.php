@@ -144,53 +144,7 @@
             </symbol>
         </svg>
 
-        <div class="dropdown position-fixed bottom-0 start-0 mb-3 ms-3 bd-mode-toggle">
-            <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme"
-                type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-                    <use href="#circle-half"></use>
-                </svg>
-                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-                <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                        aria-pressed="false">
-                        <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#sun-fill"></use>
-                        </svg>
-                        Light
-                        <svg class="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
-                        </svg>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                        aria-pressed="false">
-                        <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#moon-stars-fill"></use>
-                        </svg>
-                        Dark
-                        <svg class="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
-                        </svg>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center active"
-                        data-bs-theme-value="auto" aria-pressed="true">
-                        <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                            <use href="#circle-half"></use>
-                        </svg>
-                        Auto
-                        <svg class="bi ms-auto d-none" width="1em" height="1em">
-                            <use href="#check2"></use>
-                        </svg>
-                    </button>
-                </li>
-            </ul>
-        </div>
+
 
         <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
             <symbol id="calendar3" viewBox="0 0 16 16">
@@ -326,46 +280,95 @@
                                             <i class="bi bi-people"></i>{{ __('Class') }}</a>
                                     </li>
                                 @endif
-                            </ul>
-                            <hr class="my-3" />
-
-                            <ul class="nav flex-column mb-auto">
-                                @guest
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                        </li>
-                                    @endif
-                                    @if (Route::has('login'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @endif
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                            role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" v-pre>
-                                            {{ Auth::user()->name }}
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                <ul class="nav flex-column mb-auto">
+                                    @guest
+                                        @if (Route::has('register'))
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                    href="{{ route('register') }}">{{ __('Register') }}</a>
+                                            </li>
+                                        @endif
+                                        @if (Route::has('login'))
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                            </li>
+                                        @endif
+                                    @else
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                                role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false" v-pre>
+                                                {{ Auth::user()->name }}
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
-                                @endguest
+                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+                                    @endguest
+                                </ul>
                             </ul>
+                            <hr class="my-3" />
+                            <div class="dropdown bottom-0 start-0 mb-3 ms-3 bd-mode-toggle mt-4">
+                                <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+                                    id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                                    aria-label="Toggle theme (auto)">
+                                    <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+                                        <use href="#circle-half"></use>
+                                    </svg>
+                                    <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                                    <li>
+                                        <button type="button" class="dropdown-item d-flex align-items-center"
+                                            data-bs-theme-value="light" aria-pressed="false">
+                                            <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                                <use href="#sun-fill"></use>
+                                            </svg>
+                                            Light
+                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                <use href="#check2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item d-flex align-items-center"
+                                            data-bs-theme-value="dark" aria-pressed="false">
+                                            <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                                <use href="#moon-stars-fill"></use>
+                                            </svg>
+                                            Dark
+                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                <use href="#check2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item d-flex align-items-center active"
+                                            data-bs-theme-value="auto" aria-pressed="true">
+                                            <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                                <use href="#circle-half"></use>
+                                            </svg>
+                                            Auto
+                                            <svg class="bi ms-auto d-none" width="1em" height="1em">
+                                                <use href="#check2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

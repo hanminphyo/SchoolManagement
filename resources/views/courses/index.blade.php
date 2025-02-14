@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row mt-3">
-            <div class="col-12 d-flex justify-content-between">
+            <div class="col-12 d-flex justify-content-between mt-3">
                 <h1>Course List</h1>
                 <form action="{{ route('courses.search') }}" method="GET" id="search-form"
                     class="col-lg-auto mb-lg-0 me-lg-3 pe-4" role="search">
@@ -90,6 +90,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $courses->links() }}
         </div>
 
         <div class="container d-block d-sm-none d-md-none mt-4">
@@ -147,6 +148,7 @@
                     </div>
                 </div>
             @endforeach
+            {{ $courses->links() }}
         </div>
     </div>
 @endsection

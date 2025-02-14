@@ -18,7 +18,7 @@ class GroupController extends Controller
     public function index()
     {
 
-        $groups = Group::all();
+        $groups = Group::paginate(2);
         // dd($groups);
         $teachers = Teacher::all();
         // dd($teachers);
@@ -46,8 +46,9 @@ class GroupController extends Controller
     public function show($id)
     {
         $group = Group::find($id);
-        $teachers = Teacher::all();
-        return view('groups.show')->with('group', $group)->with('teachers', $teachers);
+        // dd($group);
+        $teacher = Teacher::find($id);
+        return view('groups.show')->with('group', $group)->with('teacher', $teacher);
     }
 
     public function store()
@@ -73,8 +74,8 @@ class GroupController extends Controller
         $group->days = implode(', ', request()->days);
         $group->start_time = request()->start_time;
         $group->end_time = request()->end_time;
-        $group->start_date = Carbon::createFromFormat('Y-m-d', request()->start_date)->format('d/m/y');
-        $group->end_date = Carbon::createFromFormat('Y-m-d', request()->end_date)->format('d/m/y');
+        $group->start_date =  request()->start_date;
+        $group->end_date = request()->end_date;
         $group->save();
         return redirect('/groups')->with('info', 'A Class has been created');
     }
@@ -150,7 +151,7 @@ class GroupController extends Controller
             ->orWhereHas('course', function ($q) use ($query) {
                 $q->where('name', 'LIKE', "%{$query}%");
             })
-            ->get();
+            ->paginate(2);
         return view('groups.index')->with(['groups' => $groups, 'teachers' => $teachers, 'query' => $query]);
     }
 };

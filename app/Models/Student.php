@@ -20,7 +20,11 @@ class Student extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class,)->withDefault();
+    }
+    public function getCourseNameAttribute()
+    {
+        return $this->course ? $this->course->name : 'No Course Assigned';
     }
     public function dashboard()
     {

@@ -16,7 +16,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $students = Student::all();
+        $students = Student::paginate(2);
         // dd($students);
         return view('students.index', ['students' => $students]);
     }
@@ -134,7 +134,7 @@ class StudentController extends Controller
             ->orWhereHas('course', function ($course) use ($query) {
                 $course->where('name', 'LIKE', "%{$query}%");
             })
-            ->get();
+            ->paginate(2);
         return view('students.index')->with(['students' => $students, 'query' => $query]);
     }
 }

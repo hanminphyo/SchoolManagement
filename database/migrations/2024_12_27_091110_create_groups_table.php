@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('teacher_id')->nullable();
             // $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->string('days');
             $table->string('start_time');
             $table->string('end_time');
@@ -24,9 +24,9 @@ return new class extends Migration
             $table->date('end_date');
             $table->timestamps();
 
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('set null');
             // $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
         });
     }
 

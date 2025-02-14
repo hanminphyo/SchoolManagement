@@ -10,20 +10,23 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('role')->get();
+        $users = User::all()->with('role')->get();
         $roles = Role::all();
         return view('admin.users.index', compact('users', 'roles'));
     }
 
     public function assignRole(Request $request, User $user)
     {
+        // dd($request);
+
         $request->validate([
             'role_id' => 'required|exists:roles,id',
         ]);
-
+        $user = User::find($request->user_id);
         $user->role_id = $request->role_id;
+
         $user->save();
 
-        return redirect()->back()->with('success', 'Role assigned successfully.');
+        return redirect('/dashboard');
     }
 }
